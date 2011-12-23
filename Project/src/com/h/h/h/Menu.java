@@ -37,17 +37,19 @@ public class Menu extends Activity {
 		 // Handle item selection
 	    switch (item.getItemId()) {
 	    case R.id.SettingItem:
-	    	
+	    {
 	    	Intent myIntent = new Intent(Menu.this, Settings.class);
 	    		
 			Menu.this.startActivity(myIntent);
+			return true;
+	    }
 	    case R.id.AboutItem:
-	    
-	    	Intent myIntent1 = new Intent(Menu.this, About.class);
+	    {
+	    	Intent myIntent = new Intent(Menu.this, About.class);
     		
-			Menu.this.startActivity(myIntent1);
+			Menu.this.startActivity(myIntent);
 	        return true;
-	    
+	    }
 	    default:
 		
 		return super.onOptionsItemSelected(item);
