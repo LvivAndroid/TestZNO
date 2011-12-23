@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+  xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent" android:gravity="center_horizontal" android:background="@color/silver" android:orientation="vertical">
+    <ScrollView android:id="@+id/scrollView1" android:layout_width="fill_parent" android:layout_height="wrap_content">
+        <LinearLayout android:id="@+id/linearLayout1" android:layout_width="fill_parent" android:layout_height="fill_parent" android:orientation="vertical" android:gravity="center_horizontal">
+            <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:textSize="15px" android:id="@+id/space1" android:text="    "></TextView>
+            <TextView android:layout_width="wrap_content" android:textColor="@color/black" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:id="@+id/timeMod" android:text=" Виберіть режим тестування"></TextView>
+            <TextView android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceLarge" android:layout_height="wrap_content" android:textSize="10px" android:id="@+id/Space2" android:text="  "></TextView>
+            <LinearLayout android:id="@+id/linearLayout2" android:layout_height="fill_parent" android:orientation="vertical" android:layout_width="fill_parent" android:gravity="left">
+                <RadioButton android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_height="wrap_content" android:id="@+id/TimeYtv" android:text=" Режим на час" android:textColor="@color/black" android:checked="false"></RadioButton>
+                <RadioButton android:layout_width="wrap_content" android:textAppearance="?android:attr/textAppearanceMedium" android:layout_height="wrap_content" android:id="@+id/TimeNotv" android:text=" Вільний режим" android:textColor="@color/black" android:checked="true"></RadioButton>
+            </LinearLayout>
+            <Button android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Підтвердити" android:id="@+id/SettingsConf"></Button>
+            
+        </LinearLayout>
+    </ScrollView>
+    
+</LinearLayout>

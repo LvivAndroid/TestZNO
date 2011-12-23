@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, ProjectActivity!</string>
+    <string name="app_name">Project</string>
+    <color name="red">#881616</color>
+    <color name="silver">#808080</color>
+    <color name="black">#000</color>
+</resources>
