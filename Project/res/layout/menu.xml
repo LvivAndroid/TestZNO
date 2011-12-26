@@ -1,9 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-  xmlns:android="http://schemas.android.com/apk/res/android"
-  android:layout_width="fill_parent"
-  android:layout_height="fill_parent" android:gravity="center" android:weightSum="1" android:background="#888888" android:orientation="horizontal">
-    <Button android:id="@+id/Button02" android:layout_height="108dp" android:layout_width="164dp" android:text="Test" android:textSize="45px"></Button>
-    <Button android:id="@+id/Button01" android:layout_width="164dp" android:layout_height="108dp" android:textSize="45px" android:text="Score"></Button>
-    
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#888888"
+    android:gravity="center"
+    android:orientation="horizontal"
+    android:weightSum="1" >
+
+    <Button
+        android:id="@+id/ChooseTest"
+        android:layout_width="164dp"
+        android:layout_height="108dp"
+        android:text="Test"
+        android:textSize="45dp" />
+
+    <Button
+        android:id="@+id/ShowStatistic"
+        android:layout_width="164dp"
+        android:layout_height="108dp"
+        android:text="Score"
+        android:textSize="45dp" />
+
 </LinearLayout>

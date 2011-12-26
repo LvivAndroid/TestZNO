@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-  xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="Settings" android:icon="@android:drawable/ic_menu_preferences" android:id="@+id/SettingItem">
-        <menu>
-            <item android:enabled="true" android:checked="true" android:id="@+id/TimeItem" android:title="Час" android:checkable="true">
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item
+        android:id="@+id/SettingItem"
+        android:icon="@android:drawable/ic_menu_preferences"
+        android:title="Settings">
+        <!-- <menu>
+            <item
+                android:id="@+id/TimeItem"
+                android:checkable="true"
+                android:checked="true"
+                android:enabled="true"
+                android:title="Час">
             </item>
-            <item android:id="@+id/SoundItem" android:title="Звук" android:checked="false" android:checkable="true"></item>
-            
-        </menu>
+            <item
+                android:id="@+id/SoundItem"
+                android:checkable="true"
+                android:checked="false"
+                android:title="Звук">
+            </item>
+        </menu> -->
     </item>
-    <item android:title="About" android:icon="@android:drawable/ic_menu_info_details" android:id="@+id/AboutItem">
-        
+    <item
+        android:id="@+id/AboutItem"
+        android:icon="@android:drawable/ic_menu_info_details"
+        android:title="About">
     </item>
-    
+
 </menu>

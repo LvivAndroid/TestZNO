@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="hello">Hello World, ProjectActivity!</string>
     <string name="contains_links">"Типу інфа про нас і тд і тд  http://vk.com/haawa"</string>
     <string name="app_name">Project</string>
+
     <color name="red">#881616</color>
     <color name="silver">#808080</color>
     <color name="black">#000</color>
+
+    <string name="InfoAboutDevelopers">Дана програма виконана такимито такимито ушльопками..)  http://vk.com/cupidon4uk   http://vk.com/haawa  ДОПОМОЖІТЬ ПОССОНАМ, ПОКЛІКАЙТЕ ПО РЕКЛАМКАХ!!))</string>
+
 </resources>
