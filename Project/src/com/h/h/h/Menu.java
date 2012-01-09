@@ -35,7 +35,7 @@ public class Menu extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-				Intent myIntent = new Intent(Menu.this, SubjectSelector.class);
+				Intent myIntent = new Intent(Menu.this, Statistic.class);
 				startActivity(myIntent);
 			}
 		});

@@ -28,9 +28,11 @@ public final class R {
         public static final int untb2=0x7f020009;
     }
     public static final class id {
-        public static final int AboutItem=0x7f07000f;
+        public static final int AboutItem=0x7f070011;
         public static final int ChooseTest=0x7f070005;
-        public static final int SettingItem=0x7f07000e;
+        public static final int Maths=0x7f07000f;
+        public static final int Physics=0x7f07000e;
+        public static final int SettingItem=0x7f070010;
         public static final int SettingsConf=0x7f07000d;
         public static final int ShowStatistic=0x7f070006;
         public static final int Space2=0x7f070009;
@@ -50,7 +52,8 @@ public final class R {
         public static final int list_of_tests=0x7f030001;
         public static final int menu=0x7f030002;
         public static final int settings=0x7f030003;
-        public static final int subject_selector=0x7f030004;
+        public static final int statistic=0x7f030004;
+        public static final int subject_selector=0x7f030005;
     }
     public static final class menu {
         public static final int optionmenu=0x7f060000;
