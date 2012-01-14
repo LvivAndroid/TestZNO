@@ -18,6 +18,10 @@ public class Menu extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menu);
+				/* --- */
+				//Intent TableExperiments = new Intent(Menu.this, ListOfTests.class);
+				//startActivity(TableExperiments);
+				/* --- */
 		Button ChooseTest = (Button) findViewById(R.id.ChooseTest);
 		ChooseTest.setOnClickListener(new View.OnClickListener() {
 			
