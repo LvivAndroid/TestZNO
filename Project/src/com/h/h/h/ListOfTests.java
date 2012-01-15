@@ -51,8 +51,12 @@ public class ListOfTests extends Activity {
 			int []WhatTests = new int[NumberOfTests]; // номери тестів, які увійшли до набору 
 			int added = 0;
 			while(added < NumberOfTests) {
-				int tmp = generRandom(amount_of_tests-added);
+				int tmp = generRandom(amount_of_tests-added+1);
 				int it = 0;
+				while(it<amount_of_tests && used[it])
+					it++;
+				if(tmp==0)
+					it++;
 				while(tmp!=0) {
 					if( !used[it] )
 						tmp--;
@@ -66,13 +70,14 @@ public class ListOfTests extends Activity {
 				added ++ ;
 			}
 			
+			MyTest test_tmp;
 			for(int i=0;i<amount_of_tests;i++) {
+				test_tmp = new MyTest();
 				scanner.nextLine();
-				MyTest tmp = new MyTest();
-				tmp.read(scanner);
+				test_tmp.read(scanner);
 				for(int j=0;j<NumberOfTests;j++)
 					if(WhatTests[j]==i)
-						tests[j] = tmp;
+						tests[j] = test_tmp;
 			}
 			scanner.close();
 			// so, at this point we already have all needed tests in Array<MyTest> tests
