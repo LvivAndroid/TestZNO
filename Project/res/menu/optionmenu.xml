@@ -5,21 +5,6 @@
         android:id="@+id/SettingItem"
         android:icon="@android:drawable/ic_menu_preferences"
         android:title="Settings">
-        <!-- <menu>
-            <item
-                android:id="@+id/TimeItem"
-                android:checkable="true"
-                android:checked="true"
-                android:enabled="true"
-                android:title="Час">
-            </item>
-            <item
-                android:id="@+id/SoundItem"
-                android:checkable="true"
-                android:checked="false"
-                android:title="Звук">
-            </item>
-        </menu> -->
     </item>
     <item
         android:id="@+id/AboutItem"

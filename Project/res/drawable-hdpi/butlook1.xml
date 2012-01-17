@@ -1,10 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<selector
-  xmlns:android="http://schemas.android.com/apk/res/android">
-   
-    <item android:state_enabled="true" 
-     android:state_pressed="true" android:drawable="@drawable/tucb2" />
-   
-    <item android:state_enabled="true"
-     android:drawable="@drawable/untb2" />
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:drawable="@drawable/tucb2" android:state_enabled="true" android:state_pressed="true"/>
+    <item android:drawable="@drawable/untb2" android:state_enabled="true"/>
+
 </selector>

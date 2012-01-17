@@ -2,53 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
+    android:background="@color/silver"
     android:orientation="vertical" >
 
-    <TextView
-        android:id="@+id/textView1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="This is List of tests : "
-    />
-
-    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android"
-	    android:layout_width="fill_parent"
-	    android:layout_height="wrap_content"
-	    android:stretchColumns="1"
-	    android:id="@+id/id_table">
-        <TableRow>
-            <TextView 
-               android:id="@+id/TextRow1"
-               android:layout_column="1"
-	           android:text="A"
-	           android:padding="3dip"
-	           android:background="#FF0000"
-           	/>
-    	</TableRow>
-    	<TableRow>
-            <TextView 
-               android:id="@+id/TextRow2"
-               android:layout_column="1"
-	           android:text="B"
-	           android:padding="3dip"
-	           android:background="#FF00FF"
-           	/>
-    	</TableRow>
-    	<TableRow>
-            <TextView 
-               android:id="@+id/TextRow3"
-               android:layout_column="1"
-	           android:text="C"
-	           android:padding="3dip"
-	           android:background="#FFFF00"
-           	/>
-    	</TableRow>
-    	
-    </TableLayout>
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="This is end of list."
-    />
 </LinearLayout>
