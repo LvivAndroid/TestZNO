@@ -3,6 +3,7 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:background="@color/silver"
+    android:gravity="center_horizontal"
     android:orientation="vertical" >
 
     <ScrollView
@@ -19,22 +20,78 @@
 
             <TextView
                 android:id="@+id/textView1"
-                android:layout_width="wrap_content"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:text="TextView"
+                android:gravity="center_horizontal"
                 android:textColor="@color/black"
-                android:textSize="55px" >
+                android:textSize="40dp" >
             </TextView>
 
+            <TextView
+                android:id="@+id/Context"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textColor="@color/black"
+                android:text="TextView"
+                android:textSize="20dp" />
+            
+            <TextView
+                android:id="@+id/ansA"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textColor="@color/black"
+                android:text="TextView"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/ansB"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textColor="@color/black"
+                android:text="TextView"
+                android:textSize="20dp" />
+            
+            <TextView
+                android:id="@+id/ansC"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textColor="@color/black"
+                android:text="TextView"
+                android:textSize="20dp" />
+            
+            <TextView
+                android:id="@+id/ansD"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textColor="@color/black"
+                android:text="TextView"
+                android:textSize="20dp" />
+            
+            <TextView
+                android:id="@+id/ansE"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:textColor="@color/black"
+                android:text="TextView"
+                android:textSize="20dp" />
+            
             <TableLayout
                 android:id="@+id/tableLayout1"
-                android:layout_width="wrap_content"
-                android:layout_height="fill_parent" >
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="center" >
 
                 <TableRow
                     android:id="@+id/tableRow1"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_height="wrap_content"
+                    android:gravity="center" >
 
                     <TextView
                         android:id="@+id/textView2"
@@ -47,24 +104,42 @@
 
                 <TableRow
                     android:id="@+id/tableRow2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" >
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
+                    android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:text=" " />
 
                     <Button
                         android:id="@+id/ABut"
-                        android:layout_width="160px"
+                        android:layout_width="wrap_content"
                         android:layout_height="95px"
+                        android:layout_weight="0.33"
                         android:text="А"
-                        android:textSize="55px" >
+                        android:textSize="43px" >
                     </Button>
 
                     <Button
                         android:id="@+id/BBut"
-                        android:layout_width="160px"
+                        android:layout_width="wrap_content"
                         android:layout_height="95px"
+                        android:layout_weight="0.33"
                         android:text="Б"
-                        android:textSize="55px" >
+                        android:textSize="43px" >
                     </Button>
+
+                    <TextView
+                        android:id="@+id/textView4"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.2"
+                        android:text=" " />
                 </TableRow>
             </TableLayout>
 
@@ -75,33 +150,50 @@
 
                 <TableRow
                     android:id="@+id/tableRow3"
-                    android:layout_width="wrap_content"
+                    android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1.0"
                     android:gravity="center" >
+
+                    <TextView
+                        android:id="@+id/textView5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.03"
+                        android:text=" "
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     <Button
                         android:id="@+id/CBut"
-                        android:layout_width="160px"
                         android:layout_height="95px"
+                        android:layout_weight="0.31"
                         android:text="В"
-                        android:textSize="55px" >
+                        android:textSize="43px" >
                     </Button>
 
                     <Button
                         android:id="@+id/DBut"
-                        android:layout_width="160px"
                         android:layout_height="95px"
+                        android:layout_weight="0.37"
                         android:text="Г"
-                        android:textSize="55px" >
+                        android:textSize="43px" >
                     </Button>
 
                     <Button
                         android:id="@+id/EBut"
-                        android:layout_width="160px"
                         android:layout_height="95px"
+                        android:layout_weight="0.31"
                         android:text="Д"
-                        android:textSize="55px" >
+                        android:textSize="43px" >
                     </Button>
+
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="0.03"
+                        android:text=" "
+                        android:textAppearance="?android:attr/textAppearanceSmall" />
                 </TableRow>
             </TableLayout>
         </LinearLayout>

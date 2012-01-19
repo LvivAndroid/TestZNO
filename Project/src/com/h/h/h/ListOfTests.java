@@ -14,10 +14,13 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Environment;
+import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
@@ -27,31 +30,61 @@ import android.widget.Toast;
 public class ListOfTests extends Activity {
 
 	private MyTest[] tests;
-	private int NumberOfTests = 3;
+	private int NumberOfTests = 10;
 
 	/* HAAWA's CONSTS */
+	
 	public int score = 0;
 	public int count = 0;
-	public CheckBox[] TestCB = new CheckBox[30];
-	public TextView[] TestTV = new TextView[30];
-	public TextView[] LettersTV = new TextView[30];
+	public CheckBox[] TestCB = new CheckBox[NumberOfTests];
+	public TextView[] TestTV = new TextView[NumberOfTests];
+	public TextView[] LettersTV = new TextView[NumberOfTests];
+	public TextView[] Corr = new TextView[NumberOfTests];
 	public boolean check = true;
+	public int width;
+	public int height;
+	public int RowWidth;
+	public int orientation;
 
 	/* end HAAWA's CONSTS */
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+
 		setContentView(R.layout.list_of_tests);
+
+		// ПОЧАТОК: Перевірка орієнтації екрану,-> пошук ширини і висоти екрану
+
+		DisplayMetrics metrics = new DisplayMetrics();
+		getWindowManager().getDefaultDisplay().getMetrics(metrics);
+
+		orientation = getResources().getConfiguration().orientation;
+
+		if (orientation == 1) {
+			height = metrics.heightPixels;
+			width = metrics.widthPixels;
+		}
+
+		if (orientation == 2)
+		{
+			width = metrics.heightPixels;
+			height = metrics.widthPixels;
+		}
+
+		// КІНЕЦЬ: Перевірка орієнтації екрану,-> пошук ширини і висоти екрану
+
 		String filename = "example.txt";
 		/*
 		 * тут потрібно витягти з Bundle імя + розширення файлу, з якого
 		 * зчитуватимемо тести
 		 */
+		
 		tests = new MyTest[NumberOfTests];
 		try {
 			GenereteListOfTests(filename);
 		} catch (IOException e) {
+			Toast.makeText(getApplicationContext(), "File IO error.", Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
 		}
 
@@ -59,39 +92,68 @@ public class ListOfTests extends Activity {
 		GlobalState gs = (GlobalState) getApplication();
 		gs.setback(true);
 
+		// ПОЧАТОК: Створення scrollLook & TableLayout
 		ScrollView sv = new ScrollView(this);
 		sv.setBackgroundColor(R.color.white);
 
 		TableLayout TL = new TableLayout(this);
 		TL.setLayoutParams(new TableLayout.LayoutParams(4, 5));
-		TL.setBackgroundColor(0xff808080);
+		TL.setGravity(Gravity.CENTER);
+		TL.setBackgroundColor(Color.DKGRAY);
 
-		for (int i = 0; i <= 29; i++) {
+		// КІНЕЦЬ: Створення scrollLook & TableLayout
+
+		for (int i = 0; i < NumberOfTests; i++) {
+
+			Button[] Line1 = new Button[NumberOfTests];
+			Button[] Line2 = new Button[NumberOfTests];
+			for (int k = 0; k <= 4; k++) {
+				// ПОЧАТОК Створення Вертикальних розділювачів
+				Line1[k] = new Button(this);
+				Line1[k].setHeight(56 * height / 800);
+				Line1[k].setWidth(2);
+				Line1[k].setText("");
+				Line1[k].setClickable(false);
+				Line1[k].setBackgroundColor(Color.BLACK);
+
+				Line2[k] = new Button(this);
+				Line2[k].setHeight(2);
+				Line2[k].setWidth(2);
+				Line2[k].setText("");
+				Line2[k].setClickable(false);
+				Line2[k].setBackgroundColor(Color.BLACK);
+
+				// кінець створення розділювачів
+			}
+
+			// Створення кожного з ітих TableRow
 
 			TableRow TR = new TableRow(this);
-
+			TR.setBackgroundColor(Color.GRAY);
+			TR.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
+					LayoutParams.WRAP_CONTENT));
 			TR.setGravity(Gravity.CENTER);
 
 			TestCB[i] = new CheckBox(this);
-			TestCB[i].setBackgroundResource(R.drawable.chboxbg);
 			TestCB[i].setText("");
-			TestCB[i].setWidth(20);
-			TestCB[i].setHeight(53);
+			TestCB[i].setWidth((int) 60 * width / 480);
+			TestCB[i].setHeight((int) 56 * height / 800);
 			TestCB[i].setGravity(Gravity.CENTER);
-			TestCB[i].setVisibility(0);
+			TestCB[i].setVisibility(4);
 			TestCB[i].setChecked(false);
 			TestCB[i].setClickable(false);
 			TestCB[i].setEnabled(false);
+			TestCB[i].setBackgroundColor(Color.GRAY);
 
 			TestTV[i] = new TextView(this);
-			TestTV[i].setBackgroundResource(R.drawable.testnumbbg);
 			TestTV[i].setText(" Завдання №" + (i + 1) + "  ");
 			TestTV[i].setGravity(Gravity.CENTER);
 			TestTV[i].setClickable(true);
 			TestTV[i].setEnabled(true);
-			TestTV[i].setWidth(270);
-			TestTV[i].setHeight(53);
+			TestTV[i].setWidth((int) 260 * width / 480);
+			TestTV[i].setHeight((int) 56 * height / 800);
 			TestTV[i].setTextColor(Color.BLACK);
+			TestTV[i].setBackgroundColor(Color.GRAY);
 			final int temp = i;
 			TestTV[i].setOnClickListener(new OnClickListener() {
 
@@ -104,35 +166,144 @@ public class ListOfTests extends Activity {
 			});
 
 			LettersTV[i] = new TextView(this);
-			LettersTV[i].setBackgroundResource(R.drawable.lettersbg);
-			LettersTV[i].setText("    F");
-			LettersTV[i].setGravity(Gravity.CENTER_VERTICAL | Gravity.LEFT);
+			LettersTV[i].setText("");
+			LettersTV[i].setGravity(Gravity.CENTER);
 			LettersTV[i].setTextColor(Color.BLACK);
+			LettersTV[i].setBackgroundColor(Color.GRAY);
+			LettersTV[i].setWidth((int) 60 * width / 480);
+			LettersTV[i].setHeight((int) 56 * height / 800);
 
-			LettersTV[i].setWidth(20);
-			LettersTV[i].setHeight(53);
+			Corr[i] = new TextView(this);
+			Corr[i].setText("F");
+			Corr[i].setGravity(Gravity.CENTER);
+			Corr[i].setTextColor(Color.BLACK);
+			Corr[i].setBackgroundColor(Color.GRAY);
+			Corr[i].setWidth((int) 60 * width / 480);
+			Corr[i].setHeight((int) 56 * height / 800);
+			Corr[i].setVisibility(4);
 
+			TR.addView(Line1[0]);
 			TR.addView(TestCB[i]);
+			TR.addView(Line1[1]);
 			TR.addView(TestTV[i]);
+			TR.addView(Line1[2]);
 			TR.addView(LettersTV[i]);
+			TR.addView(Line1[3]);
+			TR.addView(Corr[i]);
+			TR.addView(Line1[4]);
+
+			// закінчення створення кожного з ітих TableRow
+
+			// створення двох останніх тейбл ролів, один просто пустота а другий
+			// з кнопкою сабміт
+			TableRow TRd = new TableRow(this);
+			TRd.setBackgroundColor(R.color.silver);
+			TRd.setLayoutParams(new LayoutParams(LayoutParams.WRAP_CONTENT,
+					LayoutParams.WRAP_CONTENT));
+			TRd.setGravity(Gravity.CENTER);
+			TRd.addView(Line2[0]);
+
+			TextView spac0 = new TextView(this);
+			TextView spac1 = new TextView(this);
+			TextView spac2 = new TextView(this);
+			TextView spac3 = new TextView(this);
+
+			spac0.setWidth((int) 60 * width / 480 + 2);
+
+			spac0.setHeight(2);
+			spac0.setBackgroundColor(Color.BLACK);
+			spac0.setText("");
+			TRd.addView(spac0);
+			TRd.addView(Line2[1]);
+
+			spac1.setWidth((int) 260 * width / 480 + 2);
+
+			spac1.setHeight(2);
+			spac1.setBackgroundColor(Color.BLACK);
+			spac1.setText("");
+			TRd.addView(spac1);
+			TRd.addView(Line2[2]);
+
+			spac2.setWidth((int) 60 * width / 480 + 2);
+
+			spac2.setHeight(2);
+			spac2.setBackgroundColor(Color.BLACK);
+			spac2.setText("");
+			TRd.addView(spac2);
+			TRd.addView(Line2[3]);
+
+			spac3.setWidth((int) 60 * width / 480 + 2);
+
+			spac3.setHeight(2);
+			spac3.setBackgroundColor(Color.BLACK);
+			spac3.setText("");
+			TRd.addView(spac3);
+			TRd.addView(Line2[4]);
 
 			TL.addView(TR);
-
+			TL.addView(TRd);
 		}
 
-		// TableRow TR = new TableRow(this);
-		// TextView space = new TextView(this);
-		// space.setText("");
-		// space.setHeight(25);
-		// TR.addView(space);
-		// TL.addView(TR);
-		// TableRow TR1 = new TableRow(this);
-		// Button Submit = new Button(this);
-		// Submit.setHeight(70);
-		// Submit.setText("Звірити результати");
-		// TR1.setGravity(Gravity.CENTER);
-		// TR1.addView(Submit);
-		// TL.addView(TR1);
+		TableRow TR = new TableRow(this);
+		TextView space = new TextView(this);
+		TR.setBackgroundColor(Color.DKGRAY);
+		space.setText("");
+		space.setHeight(25);
+		TR.addView(space);
+		TL.addView(TR);
+		TableRow TR1 = new TableRow(this);
+		Button Submit = new Button(this);
+		Submit.setHeight((int) 70 * height / 800);
+		Submit.setWidth((int) 230 * height / 800);
+		Submit.setText("Звірити результати");
+		TR1.setGravity(Gravity.CENTER);
+
+		TextView t0 = new TextView(this);
+		t0.setWidth(2);
+		t0.setBackgroundColor(Color.DKGRAY);
+
+		TextView t1 = new TextView(this);
+		t1.setWidth((int) 60 * width / 480);
+		t1.setBackgroundColor(Color.DKGRAY);
+
+		TextView t2 = new TextView(this);
+		t2.setWidth(2);
+		t2.setBackgroundColor(Color.DKGRAY);
+
+		TextView t3 = new TextView(this);
+		t3.setWidth(2);
+		t3.setBackgroundColor(Color.DKGRAY);
+
+		TextView t4 = new TextView(this);
+		t4.setWidth((int) 60 * width / 480);
+		t4.setBackgroundColor(Color.DKGRAY);
+
+		TextView t5 = new TextView(this);
+		t5.setWidth(2);
+		t5.setBackgroundColor(Color.DKGRAY);
+
+		TextView t6 = new TextView(this);
+		t6.setWidth((int) 60 * width / 480);
+		t6.setBackgroundColor(Color.DKGRAY);
+
+		TextView t7 = new TextView(this);
+		t7.setWidth(2);
+		t7.setBackgroundColor(Color.DKGRAY);
+
+		TR1.addView(t0);
+		TR1.addView(t1);
+		TR1.addView(t2);
+		TR1.addView(Submit);
+		TR1.addView(t3);
+		TR1.addView(t4);
+		TR1.addView(t5);
+		TR1.addView(t6);
+		TR1.addView(t7);
+
+		TL.addView(TR1);
+
+		// створення двох останніх тейбл ролів, один просто пустота а другий з
+		// кнопкою сабміт
 
 		sv.addView(TL);
 
@@ -189,32 +360,26 @@ public class ListOfTests extends Activity {
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
+			Toast.makeText(getApplicationContext(), "File not founded.", Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
 		}
 	}
 
-	/* for testing only */
-	/*
-	 * private void ShowData() { TextView tv1 = (TextView)
-	 * findViewById(R.id.TextRow1); TextView tv2 = (TextView)
-	 * findViewById(R.id.TextRow2); TextView tv3 = (TextView)
-	 * findViewById(R.id.TextRow3); String STemp = tests[0].statement + "#" +
-	 * Integer.toString(tests[0].correct_answer); for(int i=0;i<5;i++) STemp =
-	 * STemp + "#" + tests[0].answers[i]; tv1.setText(STemp);
-	 * 
-	 * STemp = tests[1].statement + "#" +
-	 * Integer.toString(tests[1].correct_answer); for(int i=0;i<5;i++) STemp =
-	 * STemp + "#" + tests[1].answers[i]; tv2.setText(STemp);
-	 * 
-	 * STemp = tests[2].statement + "#" +
-	 * Integer.toString(tests[2].correct_answer); for(int i=0;i<5;i++) STemp =
-	 * STemp + "#" + tests[2].answers[i]; tv3.setText(STemp);
-	 * Toast.makeText(getApplicationContext(), "Table updated.",
-	 * Toast.LENGTH_SHORT).show(); }
-	 */
-
 	/* start HAAWA's CODE */
 	void OpenTest(int num) {
+		/*MyTest foo = new MyTest();
+		foo.statement = "У чорному ящику лежить чотири кульки : три білі і одна чорна. Випадковим чином ви дістаєте одну кульку. Яка ймовірність того, що вона виявиться чорною?";
+		foo.answers[0] = "1/2";
+		foo.answers[1] = "1/3";
+		foo.answers[2] = "1/4";
+		foo.answers[3] = "1/5";
+		foo.answers[4] = "1/7";
+		foo.correct_answer = 2;
+		Singleton.getInstance().test = foo;
+		*/
+		Singleton.getInstance().test = tests[num];
+		Singleton.getInstance().ID = num;
+		
 		Intent myIntent = new Intent(ListOfTests.this, Test.class);
 		myIntent.putExtra("com.h.h.h.a", num + 1 + "");
 		startActivityForResult(myIntent, 1);
@@ -256,8 +421,9 @@ public class ListOfTests extends Activity {
 					}
 
 				}
-				LettersTV[gs.getnumb() - 1].setText("    " + gs.getansw()
-						+ "          " + gs.getcorr());
+				LettersTV[gs.getnumb() - 1].setText(gs.getansw() + "");
+				Corr[gs.getnumb() - 1].setText(gs.getcorr() + "");
+
 			}
 
 			else {

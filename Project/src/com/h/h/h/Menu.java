@@ -18,13 +18,13 @@ public class Menu extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menu);
-				/* --- */
-				//Intent TableExperiments = new Intent(Menu.this, ListOfTests.class);
-				//startActivity(TableExperiments);
-				/* --- */
+		/* --- */
+		// Intent TableExperiments = new Intent(Menu.this, ListOfTests.class);
+		// startActivity(TableExperiments);
+		/* --- */
 		Button ChooseTest = (Button) findViewById(R.id.ChooseTest);
 		ChooseTest.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
@@ -32,10 +32,10 @@ public class Menu extends Activity {
 				startActivity(myIntent);
 			}
 		});
-		
+
 		Button ShowStatistic = (Button) findViewById(R.id.ShowStatistic);
 		ShowStatistic.setOnClickListener(new View.OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
