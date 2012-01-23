@@ -11,14 +11,14 @@
         android:id="@+id/ChooseTest"
         android:layout_width="164dp"
         android:layout_height="108dp"
-        android:text="Test"
-        android:textSize="45dp" />
+        android:text="Тест"
+        android:textSize="40dp" />
 
     <Button
         android:id="@+id/ShowStatistic"
         android:layout_width="164dp"
         android:layout_height="108dp"
-        android:text="Score"
-        android:textSize="45dp" />
+        android:text="Рекорди"
+        android:textSize="35dp" />
 
 </LinearLayout>

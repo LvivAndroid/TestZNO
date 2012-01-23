@@ -12,15 +12,16 @@
         android:layout_width="164dp"
         android:layout_height="108dp"
         android:onClick="RunPhysics"
-        android:text="Physics"
-        android:textSize="40dp" />
+        android:text="Укр. мова"
+        android:textSize="35dp" />
 
     <Button
         android:id="@+id/Maths"
         android:layout_width="164dp"
         android:layout_height="108dp"
         android:onClick="RunMaths"
-        android:text="Maths"
-        android:textSize="40dp" />
+        android:text="Англ. мова"
+        android:enabled="false"
+        android:textSize="35dp" />
 
 </LinearLayout>

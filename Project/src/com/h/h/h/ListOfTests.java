@@ -9,6 +9,7 @@ import java.util.Scanner;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -51,9 +52,13 @@ public class ListOfTests extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-
 		setContentView(R.layout.list_of_tests);
 
+		if( Singleton.getInstance().call_on_create )
+			Singleton.getInstance().call_on_create = false;
+		else
+			return;
+		
 		// ПОЧАТОК: Перевірка орієнтації екрану,-> пошук ширини і висоти екрану
 
 		DisplayMetrics metrics = new DisplayMetrics();
@@ -91,6 +96,7 @@ public class ListOfTests extends Activity {
 		/* HAAWA's CODE */
 		GlobalState gs = (GlobalState) getApplication();
 		gs.setback(true);
+		gs.setsubm(true);
 
 		// ПОЧАТОК: Створення scrollLook & TableLayout
 		ScrollView sv = new ScrollView(this);
@@ -252,10 +258,50 @@ public class ListOfTests extends Activity {
 		TR.addView(space);
 		TL.addView(TR);
 		TableRow TR1 = new TableRow(this);
-		Button Submit = new Button(this);
+		final Button Submit = new Button(this);
 		Submit.setHeight((int) 70 * height / 800);
 		Submit.setWidth((int) 230 * height / 800);
 		Submit.setText("Звірити результати");
+		
+		
+		Submit.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				// TODO Auto-generated method stub
+				GlobalState gs = (GlobalState) getApplication();
+				if(gs.getsubm())
+				{
+					for(int i=0;i<NumberOfTests;i++)
+					{
+						if (TestCB[i].isChecked())
+						
+							TestCB[i].setVisibility(0);
+						Corr[i].setVisibility(0);
+					}
+							
+							Context context = getApplicationContext();
+							CharSequence text = "Ви набрали "+ score+" правильних відповідей з усіх "+ NumberOfTests+" ";
+							int duration = Toast.LENGTH_LONG;
+
+							Toast toast = Toast.makeText(context, text, duration);
+							toast.show();
+							
+							Submit.setText("Вихід");
+							gs.setsubm(false);
+						
+					
+					
+				}
+				else {
+					Singleton.getInstance().call_on_create = true;
+					finish();
+				}
+				
+			}
+		});
+		
+		
 		TR1.setGravity(Gravity.CENTER);
 
 		TextView t0 = new TextView(this);
@@ -367,16 +413,6 @@ public class ListOfTests extends Activity {
 
 	/* start HAAWA's CODE */
 	void OpenTest(int num) {
-		/*MyTest foo = new MyTest();
-		foo.statement = "У чорному ящику лежить чотири кульки : три білі і одна чорна. Випадковим чином ви дістаєте одну кульку. Яка ймовірність того, що вона виявиться чорною?";
-		foo.answers[0] = "1/2";
-		foo.answers[1] = "1/3";
-		foo.answers[2] = "1/4";
-		foo.answers[3] = "1/5";
-		foo.answers[4] = "1/7";
-		foo.correct_answer = 2;
-		Singleton.getInstance().test = foo;
-		*/
 		Singleton.getInstance().test = tests[num];
 		Singleton.getInstance().ID = num;
 		
@@ -411,6 +447,7 @@ public class ListOfTests extends Activity {
 					if (!TestCB[gs.getnumb() - 1].isChecked()) {
 						TestCB[gs.getnumb() - 1].setChecked(true);
 						score++;
+						
 					}
 
 				} else {
@@ -421,6 +458,7 @@ public class ListOfTests extends Activity {
 					}
 
 				}
+				
 				LettersTV[gs.getnumb() - 1].setText(gs.getansw() + "");
 				Corr[gs.getnumb() - 1].setText(gs.getcorr() + "");
 
@@ -442,8 +480,8 @@ public class ListOfTests extends Activity {
 				.setPositiveButton("Вихід",
 						new DialogInterface.OnClickListener() {
 							public void onClick(DialogInterface dialog, int id) {
+								Singleton.getInstance().call_on_create = true;
 								ListOfTests.this.finish();
-
 							}
 						})
 				.setNegativeButton("Скасувати",

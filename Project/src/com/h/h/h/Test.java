@@ -15,7 +15,7 @@ public class Test extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		char []Letters = {'À','Á','Â','Ã','Ä'};
+		String []Letters = {"À","Á","Â","Ã","Ä"};
 		setContentView(R.layout.test);
 		final Intent myIntent = getIntent();
 		final String a = myIntent.getStringExtra("com.h.h.h.a");
@@ -25,17 +25,18 @@ public class Test extends Activity {
 		
 		
 		//final char corr = 'Ã';
-		final char corr = Letters[Singleton.getInstance().test.correct_answer];
+		final String corr = Letters[Singleton.getInstance().test.correct_answer];
 		
 		
 		GlobalState gs = (GlobalState) getApplication();
 
-		gs.setcorr(corr + "");
+		gs.setcorr(corr);
 		gs.setnumb(Integer.parseInt(a));
 
 		setTest();
 		/* START buttons configuration */
 		Button ABut = (Button) findViewById(R.id.ABut);
+		if (!gs.getsubm()) ABut.setEnabled(false);
 		ABut.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -48,6 +49,7 @@ public class Test extends Activity {
 		});
 
 		Button BBut = (Button) findViewById(R.id.BBut);
+		if (!gs.getsubm()) BBut.setEnabled(false);
 		BBut.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -60,6 +62,7 @@ public class Test extends Activity {
 		});
 
 		Button CBut = (Button) findViewById(R.id.CBut);
+		if (!gs.getsubm()) CBut.setEnabled(false);
 		CBut.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -72,6 +75,7 @@ public class Test extends Activity {
 		});
 
 		Button DBut = (Button) findViewById(R.id.DBut);
+		if (!gs.getsubm()) DBut.setEnabled(false);
 		DBut.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -84,6 +88,7 @@ public class Test extends Activity {
 		});
 
 		Button EBut = (Button) findViewById(R.id.EBut);
+		if (!gs.getsubm()) EBut.setEnabled(false);
 		EBut.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {

@@ -8,6 +8,7 @@ public class GlobalState extends Application {
 	private String corr;
 	private int numb;
 	private boolean back;
+	private boolean subm;
 
 	public String getansw() {
 		return answ;
@@ -40,4 +41,12 @@ public class GlobalState extends Application {
 	public void setback(boolean back) {
 		this.back = back;
 	}
+		
+		public boolean getsubm() {
+			return subm;
+		}
+
+		public void setsubm(boolean subm) {
+			this.subm = subm;
+		}	
 }

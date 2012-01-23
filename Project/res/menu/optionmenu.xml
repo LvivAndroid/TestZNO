@@ -4,12 +4,12 @@
     <item
         android:id="@+id/SettingItem"
         android:icon="@android:drawable/ic_menu_preferences"
-        android:title="Settings">
+        android:title="Налаштування">
     </item>
     <item
         android:id="@+id/AboutItem"
         android:icon="@android:drawable/ic_menu_info_details"
-        android:title="About">
+        android:title="Про розробників">
     </item>
 
 </menu>

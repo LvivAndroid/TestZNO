@@ -18,27 +18,11 @@
             android:orientation="vertical" >
 
             <TextView
-                android:id="@+id/textView3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" " >
-            </TextView>
-
-            <TextView
                 android:id="@+id/textView1"
-                android:layout_width="302dp"
+                android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
-                android:autoLink="web"
-                android:text="@string/InfoAboutDevelopers"
                 android:textAppearance="?android:attr/textAppearanceMedium"
                 android:textColor="@color/black" >
-            </TextView>
-
-            <TextView
-                android:id="@+id/textView2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text=" " >
             </TextView>
         </LinearLayout>
     </ScrollView>
