@@ -9,6 +9,7 @@ public class GlobalState extends Application {
 	private int numb;
 	private boolean back;
 	private boolean subm;
+	
 
 	public String getansw() {
 		return answ;

@@ -19,7 +19,7 @@ public class Statistic extends Activity {
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				
-				Downloader.Download("http://toloka.org/kn/files/14/new.txt","new.txt");
+				Downloader.Download("new.txt");
 			}
 		});
 	}

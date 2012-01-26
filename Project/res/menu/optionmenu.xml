@@ -11,5 +11,6 @@
         android:icon="@android:drawable/ic_menu_info_details"
         android:title="Про розробників">
     </item>
+    <item android:id="@+id/DownloadsItem" android:title="Завантажити" android:icon="@android:drawable/ic_menu_upload"></item>
 
 </menu>

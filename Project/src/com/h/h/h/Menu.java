@@ -1,9 +1,13 @@
 package com.h.h.h;
 
+import java.io.File;
+
 import com.h.h.h.Menu;
 import com.h.h.h.Settings;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuInflater;
@@ -22,6 +26,10 @@ public class Menu extends Activity {
 		// Intent TableExperiments = new Intent(Menu.this, ListOfTests.class);
 		// startActivity(TableExperiments);
 		/* --- */
+		
+		
+		
+		
 		Button ChooseTest = (Button) findViewById(R.id.ChooseTest);
 		ChooseTest.setOnClickListener(new View.OnClickListener() {
 
@@ -68,8 +76,37 @@ public class Menu extends Activity {
 			startActivity(myIntent);
 			return true;
 		}
+		case R.id.DownloadsItem: {
+			Intent myIntent = new Intent(Menu.this, download.class);
+			startActivity(myIntent);
+			return true;
+		}
 		default:
 			return super.onOptionsItemSelected(item);
 		}
 	}
+	
+	public void onBackPressed() {
+		AlertDialog.Builder builder = new AlertDialog.Builder(Menu.this);
+		builder.setMessage(
+				"Ви справді хочете вийти?")
+				.setCancelable(false)
+				.setPositiveButton("Вихід",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+								Singleton.getInstance().call_on_create = true;
+								Menu.this.finish();
+							}
+						})
+				.setNegativeButton("Скасувати",
+						new DialogInterface.OnClickListener() {
+							public void onClick(DialogInterface dialog, int id) {
+
+							}
+						});
+		AlertDialog alert = builder.create();
+		alert.show();
+
+	}
+	
 }

@@ -79,7 +79,7 @@ public class ListOfTests extends Activity {
 
 		// КІНЕЦЬ: Перевірка орієнтації екрану,-> пошук ширини і висоти екрану
 
-		String filename = "example.txt";
+		String filename = "ukrm.txt";
 		/*
 		 * тут потрібно витягти з Bundle імя + розширення файлу, з якого
 		 * зчитуватимемо тести
@@ -106,6 +106,12 @@ public class ListOfTests extends Activity {
 		TL.setLayoutParams(new TableLayout.LayoutParams(4, 5));
 		TL.setGravity(Gravity.CENTER);
 		TL.setBackgroundColor(Color.DKGRAY);
+		
+		TextView firstspace = new TextView(this);
+		firstspace.setHeight((int) 15 * height / 800);
+		TableRow firstspacerow = new TableRow(this);
+		firstspacerow.addView(firstspace);
+		TL.addView(firstspacerow);
 
 		// КІНЕЦЬ: Створення scrollLook & TableLayout
 
@@ -180,7 +186,7 @@ public class ListOfTests extends Activity {
 			LettersTV[i].setHeight((int) 56 * height / 800);
 
 			Corr[i] = new TextView(this);
-			Corr[i].setText("F");
+			Corr[i].setText("");
 			Corr[i].setGravity(Gravity.CENTER);
 			Corr[i].setTextColor(Color.BLACK);
 			Corr[i].setBackgroundColor(Color.GRAY);
@@ -254,7 +260,7 @@ public class ListOfTests extends Activity {
 		TextView space = new TextView(this);
 		TR.setBackgroundColor(Color.DKGRAY);
 		space.setText("");
-		space.setHeight(25);
+		space.setHeight((int) 15 * height / 800);
 		TR.addView(space);
 		TL.addView(TR);
 		TableRow TR1 = new TableRow(this);
@@ -284,10 +290,23 @@ public class ListOfTests extends Activity {
 							CharSequence text = "Ви набрали "+ score+" правильних відповідей з усіх "+ NumberOfTests+" ";
 							int duration = Toast.LENGTH_LONG;
 
-							Toast toast = Toast.makeText(context, text, duration);
-							toast.show();
 							
-							Submit.setText("Вихід");
+
+							AlertDialog.Builder builder = new AlertDialog.Builder(ListOfTests.this);
+							builder.setMessage(
+									"Ви набрали "+ + score+" балів з усіх "+NumberOfTests)
+									.setCancelable(false)
+									.setPositiveButton("OK:)",
+											new DialogInterface.OnClickListener() {
+												public void onClick(DialogInterface dialog, int id) {
+													
+												}
+											});
+									
+							AlertDialog alert = builder.create();
+							alert.show();
+							
+							
 							gs.setsubm(false);
 						
 					
@@ -444,6 +463,7 @@ public class ListOfTests extends Activity {
 			if (gs.getback()) {
 
 				if (gs.getansw() == gs.getcorr()) {
+					
 					if (!TestCB[gs.getnumb() - 1].isChecked()) {
 						TestCB[gs.getnumb() - 1].setChecked(true);
 						score++;
@@ -461,7 +481,8 @@ public class ListOfTests extends Activity {
 				
 				LettersTV[gs.getnumb() - 1].setText(gs.getansw() + "");
 				Corr[gs.getnumb() - 1].setText(gs.getcorr() + "");
-
+				gs.setansw("");
+				gs.setcorr("");
 			}
 
 			else {

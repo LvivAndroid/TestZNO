@@ -16,18 +16,25 @@ import android.util.Log;
 
 public class Downloader {
 
-	public static void Download(String DownloadUrl, String fileName) {
-
+	public static void Download(String fileName) {
+		
+		
+		
+		
+		
 		try {
 			File root = android.os.Environment.getExternalStorageDirectory();
 
-			File dir = new File(root.getAbsolutePath() + "/xmls");
-			if (dir.exists() == false) {
+			File dir = new File(root.getAbsolutePath());
+			if (!dir.exists()) {
 				dir.mkdirs();
+				
+			
 			}
-
-			URL url = new URL(DownloadUrl); // you can write here any link
-			File file = new File(dir, fileName);
+			
+			
+			URL url = new URL("http://pitest.org.ua/up/example.txt"); // you can write here any link
+			File file = new File(dir, "example.txt");
 
 			long startTime = System.currentTimeMillis();
 			Log.d("DownloadManager", "download begining");
@@ -64,6 +71,7 @@ public class Downloader {
 
 		} catch (IOException e) {
 			Log.d("DownloadManager", "Error: " + e);
+			
 		}
 
 	}
