@@ -9,5 +9,6 @@
     <color name="silver">#808080</color>
     <color name="black">#ff000000</color>
     <color name="white">#ffffffff</color>
+    <string name="scoreFile">score.txt</string>
 
 </resources>

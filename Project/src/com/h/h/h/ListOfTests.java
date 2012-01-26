@@ -1,9 +1,14 @@
 package com.h.h.h;
 
+import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.FileReader;
+import java.io.InputStreamReader;
+import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -34,7 +39,7 @@ public class ListOfTests extends Activity {
 	private int NumberOfTests = 12;
 
 	/* HAAWA's CONSTS */
-	
+
 	public int score = 0;
 	public int count = 0;
 	public CheckBox[] TestCB = new CheckBox[NumberOfTests];
@@ -53,12 +58,12 @@ public class ListOfTests extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_of_tests);
-
-		if( Singleton.getInstance().call_on_create )
+		Singleton.getInstance().ALL_TESTS = NumberOfTests;
+		if (Singleton.getInstance().call_on_create)
 			Singleton.getInstance().call_on_create = false;
 		else
 			return;
-		
+
 		// ПОЧАТОК: Перевірка орієнтації екрану,-> пошук ширини і висоти екрану
 
 		DisplayMetrics metrics = new DisplayMetrics();
@@ -71,8 +76,7 @@ public class ListOfTests extends Activity {
 			width = metrics.widthPixels;
 		}
 
-		if (orientation == 2)
-		{
+		if (orientation == 2) {
 			width = metrics.heightPixels;
 			height = metrics.widthPixels;
 		}
@@ -84,12 +88,13 @@ public class ListOfTests extends Activity {
 		 * тут потрібно витягти з Bundle імя + розширення файлу, з якого
 		 * зчитуватимемо тести
 		 */
-		
+
 		tests = new MyTest[NumberOfTests];
 		try {
 			GenereteListOfTests(filename);
 		} catch (IOException e) {
-			Toast.makeText(getApplicationContext(), "File IO error.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "File IO error.",
+					Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
 		}
 
@@ -106,7 +111,7 @@ public class ListOfTests extends Activity {
 		TL.setLayoutParams(new TableLayout.LayoutParams(4, 5));
 		TL.setGravity(Gravity.CENTER);
 		TL.setBackgroundColor(Color.DKGRAY);
-		
+
 		TextView firstspace = new TextView(this);
 		firstspace.setHeight((int) 15 * height / 800);
 		TableRow firstspacerow = new TableRow(this);
@@ -268,65 +273,60 @@ public class ListOfTests extends Activity {
 		Submit.setHeight((int) 70 * height / 800);
 		Submit.setWidth((int) 230 * height / 800);
 		Submit.setText("Звірити результати");
-		
-		
+
 		Submit.setOnClickListener(new OnClickListener() {
-			
+
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
 				GlobalState gs = (GlobalState) getApplication();
-				if(gs.getsubm())
-				{
+				if (gs.getsubm()) {
+					AddNewScore(score);
 					Submit.setText("Вихід");
-					String []Letters = {"А","Б","В","Г","Д"};
-					for(int i=0;i<NumberOfTests;i++) {
+					String[] Letters = { "А", "Б", "В", "Г", "Д" };
+					for (int i = 0; i < NumberOfTests; i++) {
 						Corr[i].setText(Letters[tests[i].correct_answer]);
 					}
-					
-					for(int i=0;i<NumberOfTests;i++)
-					{
+
+					for (int i = 0; i < NumberOfTests; i++) {
 						if (TestCB[i].isChecked())
-						
 							TestCB[i].setVisibility(0);
 						Corr[i].setVisibility(0);
 					}
-							
-							Context context = getApplicationContext();
-							CharSequence text = "Ви набрали "+ score+" правильних відповідей з усіх "+ NumberOfTests+" ";
-							int duration = Toast.LENGTH_LONG;
 
-							
+					Context context = getApplicationContext();
+					CharSequence text = "Ви набрали " + score
+							+ " правильних відповідей з усіх " + NumberOfTests
+							+ " ";
+					int duration = Toast.LENGTH_LONG;
 
-							AlertDialog.Builder builder = new AlertDialog.Builder(ListOfTests.this);
-							builder.setMessage(
-									"Ви набрали "+ + score+" балів з усіх "+NumberOfTests)
-									.setCancelable(false)
-									.setPositiveButton("OK",
-											new DialogInterface.OnClickListener() {
-												public void onClick(DialogInterface dialog, int id) {
-													
-												}
-											});
-									
-							AlertDialog alert = builder.create();
-							alert.show();
-							
-							
-							gs.setsubm(false);
-						
-					
-					
-				}
-				else {
+					AlertDialog.Builder builder = new AlertDialog.Builder(
+							ListOfTests.this);
+					builder.setMessage(
+							"Ви набрали " + +score + " балів з усіх "
+									+ NumberOfTests)
+							.setCancelable(false)
+							.setPositiveButton("OK",
+									new DialogInterface.OnClickListener() {
+										public void onClick(
+												DialogInterface dialog, int id) {
+
+										}
+									});
+
+					AlertDialog alert = builder.create();
+					alert.show();
+
+					gs.setsubm(false);
+
+				} else {
 					Singleton.getInstance().call_on_create = true;
 					finish();
 				}
-				
+
 			}
 		});
-		
-		
+
 		TR1.setGravity(Gravity.CENTER);
 
 		TextView t0 = new TextView(this);
@@ -391,7 +391,12 @@ public class ListOfTests extends Activity {
 				+ File.separator;
 		String MY_FILE = path + filename;
 		try {
-			Scanner scanner = new Scanner(new FileReader(MY_FILE));
+			FileInputStream Ff = new FileInputStream(MY_FILE);
+			InputStreamReader wtf = new InputStreamReader(Ff);
+			String enc = wtf.getEncoding();
+			enc = "UTF-8";
+			Scanner scanner = new Scanner(Ff, enc);
+			// TODO
 			int amount_of_tests = scanner.nextInt();
 			scanner.nextLine();
 			Boolean[] used = new Boolean[amount_of_tests];
@@ -431,7 +436,8 @@ public class ListOfTests extends Activity {
 			}
 			scanner.close();
 		} catch (FileNotFoundException e) {
-			Toast.makeText(getApplicationContext(), "File not founded.", Toast.LENGTH_SHORT).show();
+			Toast.makeText(getApplicationContext(), "File not founded.",
+					Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
 		}
 	}
@@ -440,7 +446,7 @@ public class ListOfTests extends Activity {
 	void OpenTest(int num) {
 		Singleton.getInstance().test = tests[num];
 		Singleton.getInstance().ID = num;
-		
+
 		Intent myIntent = new Intent(ListOfTests.this, Test.class);
 		myIntent.putExtra("com.h.h.h.a", num + 1 + "");
 		startActivityForResult(myIntent, 1);
@@ -469,11 +475,11 @@ public class ListOfTests extends Activity {
 			if (gs.getback()) {
 
 				if (gs.getansw() == gs.getcorr()) {
-					
+
 					if (!TestCB[gs.getnumb() - 1].isChecked()) {
 						TestCB[gs.getnumb() - 1].setChecked(true);
 						score++;
-						
+
 					}
 
 				} else {
@@ -484,7 +490,7 @@ public class ListOfTests extends Activity {
 					}
 
 				}
-				
+
 				LettersTV[gs.getnumb() - 1].setText(gs.getansw() + "");
 				Corr[gs.getnumb() - 1].setText(gs.getcorr() + "");
 				gs.setansw("");
@@ -521,6 +527,79 @@ public class ListOfTests extends Activity {
 		alert.show();
 
 	}
+
 	/* end HAAWA's CODE */
+	
+	public boolean isExternalStorageAvailable() {
+        boolean state = false;
+        String extStorageState = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED.equals(extStorageState)) {
+            state = true;
+        }
+        return state;
+    }
+	
+	// Helper Method to Test if external Storage is read only
+    public boolean isExternalStorageReadOnly() {
+        boolean state = false;
+        String extStorageState = Environment.getExternalStorageState();
+        if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)) {
+            state = true;
+        }
+        return state;
+    }
+	
+    private String GetDate() {
+    	String today = "";
+    	Date date = new Date();
+        today += Integer.toString(date.getYear() + 1900) + '/';
+        today += Integer.toString(date.getMonth() + 1) + '/';
+        today += Integer.toString(date.getDate() );
+        return today;
+    }
+
+	private void AddNewScore(int Score) {
+		if( !isExternalStorageAvailable() || isExternalStorageReadOnly() )
+			return;
+		String dates[] = null;
+		int values[] = null;
+		String path = Environment.getExternalStorageDirectory() + File.separator;
+        String MY_FILE = path + R.string.scoreFile;
+        int n;
+        String add;
+        
+        /* read old data */
+		try {
+			Scanner s = new Scanner(new FileReader(MY_FILE));
+			n = s.nextInt();
+			dates = new String[n];
+			values = new int[n];
+			for (int i = 0; i < n; ++i) {
+				values[i] = s.nextInt();
+				dates[i] = s.nextLine();
+			}
+			s.close();
+			n++;
+		} catch (FileNotFoundException e) {
+			n = 1;
+			e.printStackTrace();
+		}
+		add = Integer.toString(Score) + " " + GetDate();
+		
+		/* write new data */
+		BufferedWriter out;
+		try {
+			out = new BufferedWriter(new FileWriter(MY_FILE));
+			out.write(Integer.toString(n) + "\n");
+			for(int i=0;i<n-1;i++)
+				out.write(Integer.toString(values[i]) + dates[i] + "\n");
+			out.write(add);
+			out.close();
+		} catch (IOException e) {
+			//TODO something went wrong
+			e.printStackTrace();
+		}
+        
+	}
 
 }
