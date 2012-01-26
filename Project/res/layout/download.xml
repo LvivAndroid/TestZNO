@@ -4,28 +4,22 @@
     android:layout_height="fill_parent"
     android:background="@color/silver"
     android:gravity="center"
-    android:orientation="horizontal" android:weightSum="1.0">
+    android:orientation="vertical"
+    android:weightSum="1.0" >
 
-    <LinearLayout
-        android:id="@+id/linearLayout1"
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:layout_weight="0.5" android:background="@color/silver" android:gravity="center">
+    <Button
+        android:id="@+id/file1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.25"
+        android:text="Тести з української мови збірка 1" />
 
-        <Button
-            android:id="@+id/file1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Тести з української мови збірка 1" />
-
-        <Button
-            android:id="@+id/file2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="0.5"
-            android:text="Тести з української мови збірка 2" android:enabled="false"/>
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/file2"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.25"
+        android:enabled="false"
+        android:text="Тести з української мови збірка 2" />
 
 </LinearLayout>

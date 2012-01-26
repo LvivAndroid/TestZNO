@@ -31,7 +31,7 @@ import android.widget.Toast;
 public class ListOfTests extends Activity {
 
 	private MyTest[] tests;
-	private int NumberOfTests = 10;
+	private int NumberOfTests = 12;
 
 	/* HAAWA's CONSTS */
 	
@@ -278,6 +278,12 @@ public class ListOfTests extends Activity {
 				GlobalState gs = (GlobalState) getApplication();
 				if(gs.getsubm())
 				{
+					Submit.setText("Вихід");
+					String []Letters = {"А","Б","В","Г","Д"};
+					for(int i=0;i<NumberOfTests;i++) {
+						Corr[i].setText(Letters[tests[i].correct_answer]);
+					}
+					
 					for(int i=0;i<NumberOfTests;i++)
 					{
 						if (TestCB[i].isChecked())
@@ -296,7 +302,7 @@ public class ListOfTests extends Activity {
 							builder.setMessage(
 									"Ви набрали "+ + score+" балів з усіх "+NumberOfTests)
 									.setCancelable(false)
-									.setPositiveButton("OK:)",
+									.setPositiveButton("OK",
 											new DialogInterface.OnClickListener() {
 												public void onClick(DialogInterface dialog, int id) {
 													
