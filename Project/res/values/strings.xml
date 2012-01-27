@@ -3,7 +3,7 @@
 
     <string name="hello">Hello World, ProjectActivity!</string>
     <string name="contains_links">"Типу інфа про нас і тд і тд  http://vk.com/haawa"</string>
-    <string name="app_name">Project</string>
+    <string name="app_name">TestTerra</string>
 
     <color name="red">#881616</color>
     <color name="silver">#808080</color>

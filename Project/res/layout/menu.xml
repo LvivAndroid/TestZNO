@@ -12,7 +12,7 @@
         android:layout_width="164dp"
         android:layout_height="108dp"
         android:text="Тест"
-        android:textSize="40dp" />
+        android:textSize="38dp" />
 
     <Button
         android:id="@+id/ShowStatistic"
