@@ -18,11 +18,15 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
+import android.view.Window;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -58,6 +62,13 @@ public class ListOfTests extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_of_tests);
+		
+		GradientDrawable gd = (GradientDrawable) getApplicationContext().getResources().getDrawable(R.drawable.grad);
+        Display display = getWindowManager().getDefaultDisplay(); 
+        int width = display.getWidth();
+        int height = display.getHeight();
+    	gd.setGradientRadius((float) (Math.max(width,height)*0.5 + 20));
+		
 		Singleton.getInstance().ALL_TESTS = NumberOfTests;
 		if (Singleton.getInstance().call_on_create)
 			Singleton.getInstance().call_on_create = false;
@@ -394,9 +405,9 @@ public class ListOfTests extends Activity {
 			FileInputStream Ff = new FileInputStream(MY_FILE);
 			InputStreamReader wtf = new InputStreamReader(Ff);
 			String enc = wtf.getEncoding();
+			// TODO
 			enc = "UTF-8";
 			Scanner scanner = new Scanner(Ff, enc);
-			// TODO
 			int amount_of_tests = scanner.nextInt();
 			scanner.nextLine();
 			Boolean[] used = new Boolean[amount_of_tests];
@@ -600,6 +611,14 @@ public class ListOfTests extends Activity {
 			e.printStackTrace();
 		}
         
+	}
+	
+	@Override
+	public void onAttachedToWindow() {
+		super.onAttachedToWindow();
+		Window window = getWindow();
+		// Eliminates color banding
+		window.setFormat(PixelFormat.RGBA_8888);
 	}
 
 }

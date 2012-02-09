@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="@color/silver"
+    android:background="@drawable/grad"
     android:gravity="center_horizontal"
     android:orientation="vertical" >
 
@@ -23,7 +23,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="40dp" >
             </TextView>
 
@@ -32,8 +32,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:textColor="@color/black"
-                android:text="TextView"
+                android:textColor="@color/white"
                 android:textSize="20dp" />
             
             <TextView
@@ -41,8 +40,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:textColor="@color/black"
-                android:text="TextView"
+                android:textColor="@color/white"
                 android:textSize="20dp" />
 
             <TextView
@@ -50,8 +48,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:textColor="@color/black"
-                android:text="TextView"
+                android:textColor="@color/white"
                 android:textSize="20dp" />
             
             <TextView
@@ -59,8 +56,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:textColor="@color/black"
-                android:text="TextView"
+                android:textColor="@color/white"
                 android:textSize="20dp" />
             
             <TextView
@@ -68,8 +64,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:textColor="@color/black"
-                android:text="TextView"
+                android:textColor="@color/white"
                 android:textSize="20dp" />
             
             <TextView
@@ -77,8 +72,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:gravity="left"
-                android:textColor="@color/black"
-                android:text="TextView"
+                android:textColor="@color/white"
                 android:textSize="20dp" />
             
             <TableLayout
@@ -121,7 +115,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="95px"
                         android:layout_weight="0.33"
-                        android:text="А"
+                        android:background="@drawable/a_state"
                         android:textSize="43px" >
                     </Button>
 
@@ -130,7 +124,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="95px"
                         android:layout_weight="0.33"
-                        android:text="Б"
+                        android:background="@drawable/b_state"
                         android:textSize="43px" >
                     </Button>
 
@@ -167,7 +161,7 @@
                         android:id="@+id/CBut"
                         android:layout_height="95px"
                         android:layout_weight="0.31"
-                        android:text="В"
+                        android:background="@drawable/c_state"
                         android:textSize="43px" >
                     </Button>
 
@@ -175,7 +169,7 @@
                         android:id="@+id/DBut"
                         android:layout_height="95px"
                         android:layout_weight="0.37"
-                        android:text="Г"
+                        android:background="@drawable/d_state"
                         android:textSize="43px" >
                     </Button>
 
@@ -183,7 +177,7 @@
                         android:id="@+id/EBut"
                         android:layout_height="95px"
                         android:layout_weight="0.31"
-                        android:text="Д"
+                        android:background="@drawable/e_state"
                         android:textSize="43px" >
                     </Button>
 

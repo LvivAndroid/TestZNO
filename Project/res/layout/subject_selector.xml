@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#888888"
+    android:background="@drawable/grad"
     android:gravity="center"
     android:orientation="horizontal"
     android:weightSum="1" >
@@ -11,17 +11,15 @@
         android:id="@+id/Physics"
         android:layout_width="164dp"
         android:layout_height="108dp"
-        android:onClick="RunPhysics"
-        android:text="Укр. мова"
-        android:textSize="35dp" />
+        android:background="@drawable/ukrm_state"
+        android:onClick="RunPhysics" />
 
     <Button
         android:id="@+id/Maths"
         android:layout_width="164dp"
         android:layout_height="108dp"
         android:onClick="RunMaths"
-        android:text="Англ. мова"
-        android:enabled="false"
-        android:textSize="35dp" />
+        android:background="@drawable/en_state"
+        android:enabled="false" />
 
 </LinearLayout>

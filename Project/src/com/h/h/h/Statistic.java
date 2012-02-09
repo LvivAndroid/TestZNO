@@ -5,8 +5,12 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.Scanner;
 import android.app.Activity;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.view.Display;
+import android.view.Window;
 import android.widget.TextView;
 
 public class Statistic extends Activity {
@@ -18,6 +22,12 @@ public class Statistic extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.statistic);
+		
+		GradientDrawable gd = (GradientDrawable) getApplicationContext().getResources().getDrawable(R.drawable.grad);
+        Display display = getWindowManager().getDefaultDisplay(); 
+        int width = display.getWidth();
+        int height = display.getHeight();
+    	gd.setGradientRadius((float) (Math.max(width,height)*0.5 + 20));
 		
 		GetAllScore();
 		
@@ -83,6 +93,14 @@ public class Statistic extends Activity {
         	maxScore.setText("Досі Ви не проходили тестування");
         	e.printStackTrace();
     	}
+	}
+	
+	@Override
+	public void onAttachedToWindow() {
+		super.onAttachedToWindow();
+		Window window = getWindow();
+		// Eliminates color banding
+		window.setFormat(PixelFormat.RGBA_8888);
 	}
 	
 }

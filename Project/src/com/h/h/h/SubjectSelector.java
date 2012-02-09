@@ -6,8 +6,12 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
+import android.view.Window;
 
 public class SubjectSelector extends Activity {
 	@Override
@@ -15,6 +19,12 @@ public class SubjectSelector extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.subject_selector);
 
+		GradientDrawable gd = (GradientDrawable) getApplicationContext().getResources().getDrawable(R.drawable.grad);
+        Display display = getWindowManager().getDefaultDisplay(); 
+        int width = display.getWidth();
+        int height = display.getHeight();
+    	gd.setGradientRadius((float) (Math.max(width,height)*0.5 + 20));
+		
 	}
 
 	public void RunMaths(View view) {
@@ -70,4 +80,13 @@ public class SubjectSelector extends Activity {
 
 		return file.exists();
 	}
+	
+	@Override
+	public void onAttachedToWindow() {
+		super.onAttachedToWindow();
+		Window window = getWindow();
+		// Eliminates color banding
+		window.setFormat(PixelFormat.RGBA_8888);
+	}
+	
 }

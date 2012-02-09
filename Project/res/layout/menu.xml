@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/Menu_id"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#888888"
+    android:background="@drawable/grad"
     android:gravity="center"
     android:orientation="horizontal"
     android:weightSum="1" >
@@ -11,14 +12,12 @@
         android:id="@+id/ChooseTest"
         android:layout_width="164dp"
         android:layout_height="108dp"
-        android:text="Тест"
-        android:textSize="38dp" />
+        android:background="@drawable/test_state" />
 
     <Button
         android:id="@+id/ShowStatistic"
         android:layout_width="164dp"
         android:layout_height="108dp"
-        android:text="Рекорди"
-        android:textSize="35dp" />
+        android:background="@drawable/records_state" />
 
 </LinearLayout>

@@ -9,10 +9,14 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 
 public class Menu extends Activity {
@@ -22,14 +26,13 @@ public class Menu extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menu);
-		/* --- */
-		// Intent TableExperiments = new Intent(Menu.this, ListOfTests.class);
-		// startActivity(TableExperiments);
-		/* --- */
 		
-		
-		
-		
+		GradientDrawable gd = (GradientDrawable) getApplicationContext().getResources().getDrawable(R.drawable.grad);
+        Display display = getWindowManager().getDefaultDisplay(); 
+        int width = display.getWidth();
+        int height = display.getHeight();
+    	gd.setGradientRadius((float) (Math.max(width,height)*0.5 + 20));
+
 		Button ChooseTest = (Button) findViewById(R.id.ChooseTest);
 		ChooseTest.setOnClickListener(new View.OnClickListener() {
 
@@ -53,6 +56,14 @@ public class Menu extends Activity {
 		});
 	}
 
+	@Override
+	public void onAttachedToWindow() {
+		super.onAttachedToWindow();
+		Window window = getWindow();
+		// Eliminates color banding
+		window.setFormat(PixelFormat.RGBA_8888);
+	}
+	
 	@Override
 	public boolean onCreateOptionsMenu(android.view.Menu menu) {
 		// TODO Auto-generated method stub
@@ -85,11 +96,10 @@ public class Menu extends Activity {
 			return super.onOptionsItemSelected(item);
 		}
 	}
-	
+
 	public void onBackPressed() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(Menu.this);
-		builder.setMessage(
-				"Ви справді хочете вийти?")
+		builder.setMessage("Ви справді хочете вийти?")
 				.setCancelable(false)
 				.setPositiveButton("Вихід",
 						new DialogInterface.OnClickListener() {
@@ -108,5 +118,4 @@ public class Menu extends Activity {
 		alert.show();
 
 	}
-	
 }

@@ -2,8 +2,12 @@ package com.h.h.h;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.PixelFormat;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.view.Display;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.RadioButton;
 
@@ -16,6 +20,12 @@ public class Settings extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.settings);
+		
+		GradientDrawable gd = (GradientDrawable) getApplicationContext().getResources().getDrawable(R.drawable.grad);
+        Display display = getWindowManager().getDefaultDisplay(); 
+        int width = display.getWidth();
+        int height = display.getHeight();
+    	gd.setGradientRadius((float) (Math.max(width,height)*0.5 + 20));
 
 		final RadioButton RB1 = (RadioButton) findViewById(R.id.TimeNotv);
 		final RadioButton RB2 = (RadioButton) findViewById(R.id.TimeYtv);
@@ -59,4 +69,13 @@ public class Settings extends Activity {
 			}
 		});
 	}
+	
+	@Override
+	public void onAttachedToWindow() {
+		super.onAttachedToWindow();
+		Window window = getWindow();
+		// Eliminates color banding
+		window.setFormat(PixelFormat.RGBA_8888);
+	}
+	
 }
