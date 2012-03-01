@@ -7,20 +7,24 @@ import android.widget.Toast;
 
 public class MyTest {
 	 public String statement;
-	 public String answers[];
+	 public String A_answer;
+	 public String B_answer;
+	 public String C_answer;
+	 public String D_answer;
+	 public String E_answer;
 	 public int correct_answer;
+	 public boolean Eans;
 	public MyTest() {
 		statement = "";
-		answers = new String[5];
+		A_answer = "";
+		B_answer = "";
+		C_answer = "";
+		D_answer = "";
+		E_answer = "";
 		correct_answer = 0;
+		Eans = true;
 	}
-	public void read(Scanner s) throws IOException {
-		correct_answer = s.nextInt();
-		s.nextLine();
-		statement = s.nextLine();
-		for(int i=0;i<5;i++)
-			answers[i] = s.nextLine();
-	}
+	
 }
 
 /*

@@ -29,7 +29,8 @@ public class download extends Activity {
 	public int width;
 	public int height;
 	public int orientation;
-
+	public String url_link = "http://pitest.org.ua/android/ukrm.sqlite";
+	public String dir = "/data/data/com.h.h.h/databases/ukrm.sqlite";
 	public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
 	private ProgressDialog mProgressDialog;
 
@@ -60,12 +61,14 @@ public class download extends Activity {
 			height = metrics.widthPixels;
 		}
 
-		LinearLayout LL = (LinearLayout) findViewById(R.id.linearLayout1);
+		//LinearLayout LL = (LinearLayout) findViewById(R.id.linearLayout1);
+		
+		
 		Button startBtn1 = (Button) findViewById(R.id.file1);
 		startBtn1.setWidth((int) width / 4);
 		startBtn1.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				startDownload("http://pitest.org.ua/android/ukrm1.txt");
+				startDownload(url_link);
 			}
 		});
 
@@ -73,7 +76,7 @@ public class download extends Activity {
 		startBtn1.setWidth((int) width / 4);
 		startBtn1.setOnClickListener(new OnClickListener() {
 			public void onClick(View v) {
-				startDownload("http://pitest.org.ua/android/ukrm1.txt");
+				startDownload(url_link);
 			}
 		});
 
@@ -121,7 +124,7 @@ public class download extends Activity {
 				Log.d("ANDRO_ASYNC", "Lenght of file: " + lenghtOfFile);
 
 				try {
-					File file = new File("/sdcard/ukrm.txt");
+					File file = new File(dir);
 					// delete the file if exists
 					file.delete();
 				} catch (Exception e) {
@@ -129,7 +132,7 @@ public class download extends Activity {
 				}
 
 				InputStream input = new BufferedInputStream(url.openStream());
-				OutputStream output = new FileOutputStream("/sdcard/ukrm.txt");
+				OutputStream output = new FileOutputStream(dir);
 
 				byte data[] = new byte[1024];
 
@@ -161,12 +164,6 @@ public class download extends Activity {
 		}
 	}
 	
-	@Override
-	public void onAttachedToWindow() {
-		super.onAttachedToWindow();
-		Window window = getWindow();
-		// Eliminates color banding
-		window.setFormat(PixelFormat.RGBA_8888);
-	}
+	
 	
 }

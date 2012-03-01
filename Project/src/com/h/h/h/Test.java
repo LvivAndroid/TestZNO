@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
 import android.view.Display;
 import android.view.View;
@@ -20,23 +21,20 @@ public class Test extends Activity {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 		
+		//gradient
 		GradientDrawable gd = (GradientDrawable) getApplicationContext().getResources().getDrawable(R.drawable.grad);
         Display display = getWindowManager().getDefaultDisplay(); 
         int width = display.getWidth();
         int height = display.getHeight();
     	gd.setGradientRadius((float) (Math.max(width,height)*0.5 + 20));
 		
+    	//letters
 		String[] Letters = { "А", "Б", "В", "Г", "Д" };
 		setContentView(R.layout.test);
 		final Intent myIntent = getIntent();
 		final String a = myIntent.getStringExtra("com.h.h.h.a");
 		TextView tv = (TextView) findViewById(R.id.textView1);
 		tv.setText("Завдання №" + a);
-		// Toast.makeText(getApplicationContext(),
-		// ""+Letters[Singleton.getInstance().test.correct_answer],
-		// Toast.LENGTH_SHORT).show();
-
-		// final char corr = 'Г';
 		final String corr = Letters[Singleton.getInstance().test.correct_answer];
 
 		GlobalState gs = (GlobalState) getApplication();
@@ -126,16 +124,22 @@ public class Test extends Activity {
 				+ Integer.toString(Singleton.getInstance().ID + 1));
 		tv = (TextView) findViewById(R.id.Context);
 		tv.setText(Singleton.getInstance().test.statement);
+		tv.setText(Html.fromHtml(tv.getText()+""));
 		tv = (TextView) findViewById(R.id.ansA);
-		tv.setText("A) " + Singleton.getInstance().test.answers[0]);
+		tv.setText("A) " + Singleton.getInstance().test.A_answer);
+		tv.setText(Html.fromHtml(tv.getText()+""));
 		tv = (TextView) findViewById(R.id.ansB);
-		tv.setText("Б) " + Singleton.getInstance().test.answers[1]);
+		tv.setText("Б) " + Singleton.getInstance().test.B_answer);
+		tv.setText(Html.fromHtml(tv.getText()+""));
 		tv = (TextView) findViewById(R.id.ansC);
-		tv.setText("В) " + Singleton.getInstance().test.answers[2]);
+		tv.setText("В) " + Singleton.getInstance().test.C_answer);
+		tv.setText(Html.fromHtml(tv.getText()+""));
 		tv = (TextView) findViewById(R.id.ansD);
-		tv.setText("Г) " + Singleton.getInstance().test.answers[3]);
+		tv.setText("Г) " + Singleton.getInstance().test.D_answer);
+		tv.setText(Html.fromHtml(tv.getText()+""));
 		tv = (TextView) findViewById(R.id.ansE);
-		tv.setText("Д) " + Singleton.getInstance().test.answers[4]);
+		tv.setText("Д) " + Singleton.getInstance().test.E_answer);
+		tv.setText(Html.fromHtml(tv.getText()+""));
 	}
 
 	public void onBackPressed() {
@@ -145,12 +149,6 @@ public class Test extends Activity {
 		finish();
 	}
 
-	@Override
-	public void onAttachedToWindow() {
-		super.onAttachedToWindow();
-		Window window = getWindow();
-		// Eliminates color banding
-		window.setFormat(PixelFormat.RGBA_8888);
-	}
+	
 
 }

@@ -39,13 +39,15 @@ import android.widget.Toast;
 
 public class ListOfTests extends Activity {
 
-	private MyTest[] tests;
+	
 	private int NumberOfTests = 12;
 
 	/* HAAWA's CONSTS */
 
 	public int score = 0;
 	public int count = 0;
+	
+	public MyTest[]   tests;
 	public CheckBox[] TestCB = new CheckBox[NumberOfTests];
 	public TextView[] TestTV = new TextView[NumberOfTests];
 	public TextView[] LettersTV = new TextView[NumberOfTests];
@@ -101,13 +103,7 @@ public class ListOfTests extends Activity {
 		 */
 
 		tests = new MyTest[NumberOfTests];
-		try {
-			GenereteListOfTests(filename);
-		} catch (IOException e) {
-			Toast.makeText(getApplicationContext(), "File IO error.",
-					Toast.LENGTH_SHORT).show();
-			e.printStackTrace();
-		}
+		GenereteListOfTests();
 
 		/* HAAWA's CODE */
 		GlobalState gs = (GlobalState) getApplication();
@@ -397,7 +393,24 @@ public class ListOfTests extends Activity {
 		return Math.abs((new Random()).nextInt(n));
 	}
 
-	void GenereteListOfTests(String filename) throws IOException {
+	void GenereteListOfTests() {
+		Helper H = new Helper(this);
+		H.open();
+		String s = H.getKEY_TEST(1)+"";
+		String s2 = H.getKEY_TEST(2)+"";
+		for(int i=0;i<NumberOfTests;i++)
+			tests[i] = new MyTest();
+		for(int i=0;i<NumberOfTests;i++) {
+			tests[i].statement = H.getKEY_TEST(i+1)+"";
+			tests[i].A_answer = H.getKEY_A_answer(i+1)+"";
+			tests[i].B_answer = H.getKEY_B_answer(i+1)+"";
+			tests[i].C_answer = H.getKEY_C_answer(i+1)+"";
+			tests[i].D_answer = H.getKEY_D_answer(i+1)+"";
+			tests[i].E_answer = H.getKEY_E_answer(i+1)+"";
+			tests[i].correct_answer = H.getKEY_CORRECT(i+1);
+			//tests[i].Eans = H.getKEY;
+		}
+		/*
 		String path = Environment.getExternalStorageDirectory()
 				+ File.separator;
 		String MY_FILE = path + filename;
@@ -440,7 +453,7 @@ public class ListOfTests extends Activity {
 			for (int i = 0; i < amount_of_tests; i++) {
 				test_tmp = new MyTest();
 				scanner.nextLine();
-				test_tmp.read(scanner);
+				//test_tmp.read(scanner);
 				for (int j = 0; j < NumberOfTests; j++)
 					if (WhatTests[j] == i)
 						tests[j] = test_tmp;
@@ -450,7 +463,7 @@ public class ListOfTests extends Activity {
 			Toast.makeText(getApplicationContext(), "File not founded.",
 					Toast.LENGTH_SHORT).show();
 			e.printStackTrace();
-		}
+		}*/
 	}
 
 	/* start HAAWA's CODE */
@@ -611,14 +624,6 @@ public class ListOfTests extends Activity {
 			e.printStackTrace();
 		}
         
-	}
-	
-	@Override
-	public void onAttachedToWindow() {
-		super.onAttachedToWindow();
-		Window window = getWindow();
-		// Eliminates color banding
-		window.setFormat(PixelFormat.RGBA_8888);
 	}
 
 }

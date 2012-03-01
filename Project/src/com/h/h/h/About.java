@@ -30,11 +30,5 @@ public class About extends Activity {
 		mTextSample.setText(Html.fromHtml(text));
 	}
 	
-	@Override
-	public void onAttachedToWindow() {
-		super.onAttachedToWindow();
-		Window window = getWindow();
-		// Eliminates color banding
-		window.setFormat(PixelFormat.RGBA_8888);
-	}
+
 }

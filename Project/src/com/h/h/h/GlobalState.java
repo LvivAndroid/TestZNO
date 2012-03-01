@@ -10,6 +10,8 @@ public class GlobalState extends Application {
 	private boolean back;
 	private boolean subm;
 	
+	private int NumberOfTests = 12;
+	
 
 	public String getansw() {
 		return answ;
@@ -50,4 +52,12 @@ public class GlobalState extends Application {
 		public void setsubm(boolean subm) {
 			this.subm = subm;
 		}	
+		
+		
+		public int NumberOfTests() {
+			return NumberOfTests;
+		}
+
+		
+		
 }

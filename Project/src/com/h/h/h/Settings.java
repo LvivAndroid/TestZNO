@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
+import android.text.Html;
 import android.view.Display;
 import android.view.View;
 import android.view.Window;
@@ -53,6 +54,21 @@ public class Settings extends Activity {
 		});
 
 		Button SettingsConf = (Button) findViewById(R.id.SettingsConf);
+		
+		Helper H = new Helper(this);
+		H.open();
+		String data = H.getKEY_TEST(13);
+		
+		SettingsConf.setText(Html.fromHtml(data));
+		H.close();
+		
+		
+		
+		
+		
+		
+		
+		
 		SettingsConf.setOnClickListener(new View.OnClickListener() {
 
 			@Override
@@ -70,12 +86,6 @@ public class Settings extends Activity {
 		});
 	}
 	
-	@Override
-	public void onAttachedToWindow() {
-		super.onAttachedToWindow();
-		Window window = getWindow();
-		// Eliminates color banding
-		window.setFormat(PixelFormat.RGBA_8888);
-	}
+	
 	
 }

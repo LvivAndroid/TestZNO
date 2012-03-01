@@ -56,13 +56,7 @@ public class Menu extends Activity {
 		});
 	}
 
-	@Override
-	public void onAttachedToWindow() {
-		super.onAttachedToWindow();
-		Window window = getWindow();
-		// Eliminates color banding
-		window.setFormat(PixelFormat.RGBA_8888);
-	}
+	
 	
 	@Override
 	public boolean onCreateOptionsMenu(android.view.Menu menu) {
@@ -88,7 +82,7 @@ public class Menu extends Activity {
 			return true;
 		}
 		case R.id.DownloadsItem: {
-			Intent myIntent = new Intent(Menu.this, download.class);
+			Intent myIntent =  new Intent("com.h.h.h.download");
 			startActivity(myIntent);
 			return true;
 		}
