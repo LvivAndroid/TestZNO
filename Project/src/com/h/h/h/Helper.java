@@ -122,7 +122,7 @@ public class Helper {
 		Cursor c = ourDatabase.query(DATABASE_TABLE, columns, KEY_ROWID + "=" + l, null, null, null, null);
 		if (c != null){
 			c.moveToFirst();
-			String data = c.getString(3);
+			String data = c.getString(4);
 			return data;
 		}
 		return null;

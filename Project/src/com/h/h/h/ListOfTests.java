@@ -394,76 +394,52 @@ public class ListOfTests extends Activity {
 	}
 
 	void GenereteListOfTests() {
+		
+		
+		int amount_of_tests = 24;
+		Boolean[] used = new Boolean[amount_of_tests];
+		for (int i = 0; i < amount_of_tests; i++)
+			used[i] = false;
+		int[] WhatTests = new int[NumberOfTests]; // номери тестів, які увійшли до набору
+		int added = 0;
+		while (added < NumberOfTests) {
+			int tmp = generRandom(amount_of_tests - added + 1);
+			int it = 0;
+			while (it < amount_of_tests && used[it])
+				it++;
+			if (tmp == 0)
+				it++;
+			while (tmp != 0) {
+				if (!used[it])
+					tmp--;
+				it++;
+				if (it == amount_of_tests)
+					it = 0;
+			}
+			it = (it - 1 + amount_of_tests) % amount_of_tests;
+			used[it] = true;
+			WhatTests[added] = it;
+			added++;
+		}
+		
 		Helper H = new Helper(this);
 		H.open();
-		String s = H.getKEY_TEST(1)+"";
-		String s2 = H.getKEY_TEST(2)+"";
 		for(int i=0;i<NumberOfTests;i++)
 			tests[i] = new MyTest();
 		for(int i=0;i<NumberOfTests;i++) {
-			tests[i].statement = H.getKEY_TEST(i+1)+"";
-			tests[i].A_answer = H.getKEY_A_answer(i+1)+"";
-			tests[i].B_answer = H.getKEY_B_answer(i+1)+"";
-			tests[i].C_answer = H.getKEY_C_answer(i+1)+"";
-			tests[i].D_answer = H.getKEY_D_answer(i+1)+"";
-			tests[i].E_answer = H.getKEY_E_answer(i+1)+"";
-			tests[i].correct_answer = H.getKEY_CORRECT(i+1);
-			//tests[i].Eans = H.getKEY;
+			int index = WhatTests[i]+1;
+			tests[i].statement = H.getKEY_TEST(index);
+			tests[i].A_answer = H.getKEY_A_answer(index);
+			tests[i].B_answer = H.getKEY_B_answer(index);
+			tests[i].C_answer = H.getKEY_C_answer(index);
+			tests[i].D_answer = H.getKEY_D_answer(index);
+			tests[i].E_answer = H.getKEY_E_answer(index);
+			tests[i].correct_answer = H.getKEY_CORRECT(index);
+			tests[i].Eans = H.getKEY_IFEEXISTS(index);
 		}
-		/*
-		String path = Environment.getExternalStorageDirectory()
-				+ File.separator;
-		String MY_FILE = path + filename;
-		try {
-			FileInputStream Ff = new FileInputStream(MY_FILE);
-			InputStreamReader wtf = new InputStreamReader(Ff);
-			String enc = wtf.getEncoding();
-			// TODO
-			enc = "UTF-8";
-			Scanner scanner = new Scanner(Ff, enc);
-			int amount_of_tests = scanner.nextInt();
-			scanner.nextLine();
-			Boolean[] used = new Boolean[amount_of_tests];
-			for (int i = 0; i < amount_of_tests; i++)
-				used[i] = false;
-			int[] WhatTests = new int[NumberOfTests]; // номери тестів, які
-														// увійшли до набору
-			int added = 0;
-			while (added < NumberOfTests) {
-				int tmp = generRandom(amount_of_tests - added + 1);
-				int it = 0;
-				while (it < amount_of_tests && used[it])
-					it++;
-				if (tmp == 0)
-					it++;
-				while (tmp != 0) {
-					if (!used[it])
-						tmp--;
-					it++;
-					if (it == amount_of_tests)
-						it = 0;
-				}
-				it = (it - 1 + amount_of_tests) % amount_of_tests;
-				used[it] = true;
-				WhatTests[added] = it;
-				added++;
-			}
-
-			MyTest test_tmp;
-			for (int i = 0; i < amount_of_tests; i++) {
-				test_tmp = new MyTest();
-				scanner.nextLine();
-				//test_tmp.read(scanner);
-				for (int j = 0; j < NumberOfTests; j++)
-					if (WhatTests[j] == i)
-						tests[j] = test_tmp;
-			}
-			scanner.close();
-		} catch (FileNotFoundException e) {
-			Toast.makeText(getApplicationContext(), "File not founded.",
-					Toast.LENGTH_SHORT).show();
-			e.printStackTrace();
-		}*/
+		H.close();
+				
+				
 	}
 
 	/* start HAAWA's CODE */
