@@ -86,6 +86,7 @@ public class Helper {
 		if (c != null){
 			c.moveToFirst();
 			String data = c.getString(1);
+			c.close();
 			return data;
 		}
 		return null;
@@ -98,6 +99,7 @@ public class Helper {
 		if (c != null){
 			c.moveToFirst();
 			String data = c.getString(2);
+			c.close();
 			return data;
 		}
 		return null;
@@ -110,6 +112,7 @@ public class Helper {
 		if (c != null){
 			c.moveToFirst();
 			String data = c.getString(3);
+			c.close();
 			return data;
 		}
 		return null;
@@ -122,6 +125,7 @@ public class Helper {
 		if (c != null){
 			c.moveToFirst();
 			String data = c.getString(4);
+			c.close();
 			return data;
 		}
 		return null;
@@ -134,6 +138,7 @@ public class Helper {
 		if (c != null){
 			c.moveToFirst();
 			String data = c.getString(5);
+			c.close();
 			return data;
 		}
 		return null;
@@ -146,6 +151,7 @@ public class Helper {
 		if (c != null){
 			c.moveToFirst();
 			String data = c.getString(7);
+			c.close();
 			return Integer.parseInt(data);
 		}
 		return 0;
@@ -158,6 +164,7 @@ public class Helper {
 		if (c != null){
 			c.moveToFirst();
 			boolean data = Boolean.parseBoolean(c.getString(8));
+			c.close();
 			return data;
 		}
 		return true;
@@ -170,6 +177,7 @@ public class Helper {
 		if (c != null){
 			c.moveToFirst();
 			String data = c.getString(6);
+			c.close();
 			return data;
 		}
 		return null;

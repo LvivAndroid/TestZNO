@@ -314,7 +314,7 @@ public class ListOfTests extends Activity {
 			tests[i].correct_answer = H.getKEY_CORRECT(index);
 			tests[i].Eans = H.getKEY_IFEEXISTS(index);
 		}
-		//H.close();
+		H.close();
 	}
 
 	/* start HAAWA's CODE */

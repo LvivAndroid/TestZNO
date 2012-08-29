@@ -83,6 +83,7 @@ public class AlternativeDB {
 		if (c != null){
 			c.moveToFirst();
 			String data = c.getString(1);
+			c.close();
 			return data;
 		}
 		return null;

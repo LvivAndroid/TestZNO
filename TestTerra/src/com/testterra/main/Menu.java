@@ -31,49 +31,51 @@ public class Menu extends Activity {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.menu);
-		
-		GradientDrawable gd = (GradientDrawable) getApplicationContext().getResources().getDrawable(R.drawable.grad);
-        Display display = getWindowManager().getDefaultDisplay(); 
-        int width = display.getWidth();
-        int height = display.getHeight();
-    	gd.setGradientRadius((float) (Math.max(width,height)*0.5 + 20));
-    	
-    	folderCreate();
-    	File alt = new File(getString(R.string.all_databases_path)+getString(R.string.alt_database_name));
-    	if(!alt.exists())
-    	{
-    	CopyAssets();
-    	}
-    	
-    	
-    	
-    	//Перевірка чи є інтернет
-    	if(isNetworkAvailable())
-    	{
-    		AlertDialog.Builder builder = new AlertDialog.Builder(this);
-    		builder.setMessage(R.string.update_dialog_message)
-    				.setCancelable(false)
-    				.setPositiveButton(R.string.update_dialog_yes,
-    						new DialogInterface.OnClickListener() {
-    							public void onClick(DialogInterface dialog, int id) {
-    								Intent myIntent = new Intent(Menu.this,download.class);
-    								startActivity(myIntent);
-    							}
-    						})
-    				.setNegativeButton(R.string.update_dialog_no,
-    						new DialogInterface.OnClickListener() {
-    							public void onClick(DialogInterface dialog, int id) {
 
-    							}
-    						});
-    		AlertDialog alert = builder.create();
-    		alert.show();
-    		
-    	}
-    	
-    	TelephonyManager tm = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
-    	Log.d(tm.getSimCountryIso()+" -sim location", this.getResources().getConfiguration().locale.getDisplayCountry()+" - location");
-    	
+		GradientDrawable gd = (GradientDrawable) getApplicationContext()
+				.getResources().getDrawable(R.drawable.grad);
+		Display display = getWindowManager().getDefaultDisplay();
+		int width = display.getWidth();
+		int height = display.getHeight();
+		gd.setGradientRadius((float) (Math.max(width, height) * 0.5 + 20));
+
+		folderCreate();
+		File alt = new File(getString(R.string.all_databases_path)
+				+ getString(R.string.alt_database_name));
+		if (!alt.exists()) {
+			CopyAssets();
+		}
+
+		// Перевірка чи є інтернет
+		if (isNetworkAvailable()) {
+			AlertDialog.Builder builder = new AlertDialog.Builder(this);
+			builder.setMessage(R.string.update_dialog_message)
+					.setCancelable(false)
+					.setPositiveButton(R.string.update_dialog_yes,
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
+									Intent myIntent = new Intent(Menu.this,
+											download.class);
+									startActivity(myIntent);
+								}
+							})
+					.setNegativeButton(R.string.update_dialog_no,
+							new DialogInterface.OnClickListener() {
+								public void onClick(DialogInterface dialog,
+										int id) {
+
+								}
+							});
+			AlertDialog alert = builder.create();
+			alert.show();
+
+		}
+
+		TelephonyManager tm = (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE);
+		Log.d(tm.getSimCountryIso() + " -sim location", this.getResources()
+				.getConfiguration().locale.getDisplayCountry() + " - location");
+
 		Button ChooseTest = (Button) findViewById(R.id.ChooseTest);
 		ChooseTest.setOnClickListener(new View.OnClickListener() {
 
@@ -96,17 +98,14 @@ public class Menu extends Activity {
 			}
 		});
 	}
-	
-	
-	
+
 	private boolean isNetworkAvailable() {
-	    ConnectivityManager connectivityManager 
-	          = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
-	    NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
-	    return activeNetworkInfo != null;
+		ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+		NetworkInfo activeNetworkInfo = connectivityManager
+				.getActiveNetworkInfo();
+		return activeNetworkInfo != null;
 	}
-	
-	
+
 	@Override
 	public boolean onCreateOptionsMenu(android.view.Menu menu) {
 		// TODO Auto-generated method stub
@@ -131,7 +130,7 @@ public class Menu extends Activity {
 			return true;
 		}
 		case R.id.DownloadsItem: {
-			Intent myIntent =  new Intent(getString(R.string.package_name));
+			Intent myIntent = new Intent(getString(R.string.package_name));
 			startActivity(myIntent);
 			return true;
 		}
@@ -161,47 +160,48 @@ public class Menu extends Activity {
 		alert.show();
 
 	}
-	
+
 	private void CopyAssets() {
-	    AssetManager assetManager = getAssets();
-	    String[] files = null;
-	    try {
-	        files = assetManager.list("");
-	    } catch (IOException e) {
-	        Log.e("tag", e.getMessage());
-	    }
-	    for(String filename : files) {
-	        InputStream in = null;
-	        OutputStream out = null;
-	        try {
-	          in = assetManager.open(filename);
-	          out = new FileOutputStream(getString(R.string.all_databases_path)+filename);
-	          copyFile(in, out);
-	          in.close();
-	          in = null;
-	          out.flush();
-	          out.close();
-	          out = null;
-	        } catch(Exception e) {
-	            Log.e("tag", e.getMessage());
-	        }       
-	    }
+		AssetManager assetManager = getAssets();
+		String[] files = null;
+		try {
+			files = assetManager.list("");
+		} catch (IOException e) {
+			Log.e("tag", e.getMessage());
+		}
+		for (String filename : files) {
+			InputStream in = null;
+			OutputStream out = null;
+			try {
+				in = assetManager.open(filename);
+				out = new FileOutputStream(
+						getString(R.string.all_databases_path) + filename);
+				copyFile(in, out);
+				in.close();
+				in = null;
+				out.flush();
+				out.close();
+				out = null;
+			} catch (Exception e) {
+				Log.e("tag", e.getMessage());
+			}
+		}
 	}
+
 	private void copyFile(InputStream in, OutputStream out) throws IOException {
-	    byte[] buffer = new byte[1024];
-	    int read;
-	    while((read = in.read(buffer)) != -1){
-	      out.write(buffer, 0, read);
-	    }
+		byte[] buffer = new byte[1024];
+		int read;
+		while ((read = in.read(buffer)) != -1) {
+			out.write(buffer, 0, read);
+		}
 	}
-	
-	private void folderCreate()  {//Simple folder creating
+
+	private void folderCreate() {// Simple folder creating
 		File folder = new File("/data/data/com.testterra.main/databases");
- 		if(!folder.exists())
- 		{
- 		    folder.mkdir();
- 		}   
- 		
+		if (!folder.exists()) {
+			folder.mkdir();
+		}
+
 	}
-	
+
 }
