@@ -56,7 +56,7 @@ public class Menu extends Activity {
 								public void onClick(DialogInterface dialog,
 										int id) {
 									Intent myIntent = new Intent(Menu.this,
-											download.class);
+											Download.class);
 									startActivity(myIntent);
 								}
 							})

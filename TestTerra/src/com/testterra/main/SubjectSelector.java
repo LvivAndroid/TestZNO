@@ -51,7 +51,7 @@ public class SubjectSelector extends Activity {
 
 									Intent intent = new Intent(
 											SubjectSelector.this,
-											download.class);
+											Download.class);
 									startActivity(intent);
 								}
 							})

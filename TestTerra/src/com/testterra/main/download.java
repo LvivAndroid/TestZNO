@@ -17,11 +17,10 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.widget.Toast;
 
-public class download extends Activity {
+public class Download extends Activity {
 
 	public int width;
 	public int height;
@@ -95,7 +94,6 @@ public class download extends Activity {
 		File file = new File(ukrm_dir);
 		long old_file_size = file.length();
 		old_length= old_file_size;
-		Log.d("!!!!!!!",new_file_size+"   "+old_file_size+"");
 		if(new_file_size>old_file_size)
 		return true;
 		else
@@ -163,14 +161,12 @@ public class download extends Activity {
 				conexion.connect();
 
 				int lenghtOfFile = conexion.getContentLength();
-				Log.d("ANDRO_ASYNC", "Lenght of file: " + lenghtOfFile);
 
 				try {
 					File file = new File(ukrm_dir);
-					// delete the file if exists
 					file.delete();
 				} catch (Exception e) {
-					// nothing
+					e.printStackTrace();
 				}
 
 				InputStream input = new BufferedInputStream(url.openStream());
@@ -196,7 +192,6 @@ public class download extends Activity {
 		}
 
 		protected void onProgressUpdate(String... progress) {
-			Log.d("ANDRO_ASYNC", progress[0]);
 			mProgressDialog.setProgress(Integer.parseInt(progress[0]));
 		}
 
