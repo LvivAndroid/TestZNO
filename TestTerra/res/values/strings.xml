@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, ProjectActivity!</string>
+    <string name="app_name">TestTerra</string>
+    <string name="package_name">com.testterra.main.download</string>
+    <string name="scoreFile">score.txt</string>
+    
+    <string name="ukrm_database_link">http://pitest.org.ua/android/ukrm.sqlite</string>
+    <string name="ukrm_database_name">ukrm.sqlite</string>
+    <string name="ukrm_database_path">/data/data/com.testterra.main/databases/ukrm.sqlite</string>
+    <string name="all_databases_path">/data/data/com.testterra.main/databases/</string>
+    <string name="alt_database_name">alt.sqlite</string>
+    
+    <string name="update_success_toast">Завдання успішно оновлено!</string>
+    <string name="update_fail_toast">Щось пішло не так :(</string>
+    <string name="update_noneed_toast">Нових оновлень не знайдено</string>
+    
+    <string name="db_not_found_title">Файлу не знайдено, завантажте будь-ласка</string>
+    <string name="db_not_found_ok">ОК</string>
+    <string name="db_not_found_cancel">Скасувати</string>
+    
+    <string name="update_dialog_message">Є доступ до інтернету, перевірити на наявність оновлень завдань?</string>
+    <string name="update_dialog_yes">Так</string>
+    <string name="update_dialog_no">Не зараз</string>
+    
+    <string name="onback_press_dialog_message">Ви справді хочете вийти?</string>
+    <string name="onback_press_dialog_yes">Вихід</string>
+    <string name="onback_press_dialog_no">Скасувати</string>
+    
+    <string name="about_text">Дана програма виконана в рамках конкурсу \"Золотий Байт\"</string>
+    <string name="about_links"><a href='http://vk.com/cupidon4uk'>Миляник Іван</a><p></p><a href='http://vk.com/haawa'>  Харчишин Андрій</a><p></p></string>
+    
+    
+    <string name="settings_title1">Виберіть кількість тестів</string>
+    <string name="settings_test_amount1">12</string>
+    <string name="settings_test_amount2">20</string>
+    <string name="settings_submit_button">Підтвердити</string>
+    
+    <string name="test_title">Завдання №</string>
+    
+    
+    <string name="statistics_title">Статистика</string>
+     <string name="statistics_hight_score">Найбільший результат : </string>
+     <string name="statistics_all_results">Всі результати</string>
+
+    <color name="red">#881616</color>
+    <color name="silver">#808080</color>
+    <color name="black">#ff000000</color>
+    <color name="white">#ffffffff</color>
+
+</resources>

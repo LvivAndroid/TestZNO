@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/grad"
+    android:gravity="center_horizontal"
+    android:orientation="vertical" >
+
+    <ScrollView
+        android:id="@+id/scrollView1"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" >
+
+        <LinearLayout
+            android:id="@+id/linearLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical" >
+
+            <TextView
+                android:id="@+id/space1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="    "
+                android:textSize="15px" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/TestAmount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_title1"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textColor="@color/white" >
+            </TextView>
+
+            <TextView
+                android:id="@+id/Space2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="  "
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:textSize="10px" >
+            </TextView>
+
+            <LinearLayout
+                android:id="@+id/linearLayout2"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent"
+                android:gravity="left"
+                android:orientation="vertical" >
+				<RadioGroup android:layout_width="fill_parent"
+                    android:layout_height="fill_parent" >
+                <RadioButton 
+                    android:id="@+id/TestAmount1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/settings_test_amount1"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/white" 
+                    android:layout_marginLeft="5dip">
+                </RadioButton>
+
+                <RadioButton
+                    android:id="@+id/TestAmount2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="false"
+                    android:text="@string/settings_test_amount2"
+                    android:textAppearance="?android:attr/textAppearanceMedium"
+                    android:textColor="@color/white"
+                    android:layout_marginLeft="5dip" >
+                </RadioButton>
+                </RadioGroup>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/SettingsConf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/settings_submit_button" >
+            </Button>
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
