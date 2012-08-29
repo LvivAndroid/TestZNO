@@ -29,7 +29,7 @@ public class Download extends Activity {
 	public static long old_length;
 	public String ukrm_dir = "/data/data/com.testterra.main/databases/ukrm.sqlite";
 	public String ukrm_url_link = "http://pitest.org.ua/android/ukrm.sqlite";
-	
+
 	public static final int DIALOG_DOWNLOAD_PROGRESS = 0;
 	private ProgressDialog mProgressDialog;
 
@@ -39,13 +39,14 @@ public class Download extends Activity {
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.download);
-		
-		GradientDrawable gd = (GradientDrawable) getApplicationContext().getResources().getDrawable(R.drawable.grad);
-        Display display = getWindowManager().getDefaultDisplay(); 
-        int width = display.getWidth();
-        int height = display.getHeight();
-    	gd.setGradientRadius((float) (Math.max(width,height)*0.5 + 20));
-		
+
+		GradientDrawable gd = (GradientDrawable) getApplicationContext()
+				.getResources().getDrawable(R.drawable.grad);
+		Display display = getWindowManager().getDefaultDisplay();
+		int width = display.getWidth();
+		int height = display.getHeight();
+		gd.setGradientRadius((float) (Math.max(width, height) * 0.5 + 20));
+
 		DisplayMetrics metrics = new DisplayMetrics();
 		getWindowManager().getDefaultDisplay().getMetrics(metrics);
 
@@ -61,12 +62,10 @@ public class Download extends Activity {
 			height = metrics.widthPixels;
 		}
 
-		//LinearLayout LL = (LinearLayout) findViewById(R.id.linearLayout1);
-		
-		
-			
+		// LinearLayout LL = (LinearLayout) findViewById(R.id.linearLayout1);
+
 		try {
-			if(ifAvaliableUpdates()){
+			if (ifAvaliableUpdates()) {
 				startDownload(ukrm_url_link);
 			}
 		} catch (IOException e) {
@@ -75,17 +74,11 @@ public class Download extends Activity {
 			e.printStackTrace();
 			finish();
 		}
-		
-		
-			
-		
-		
-		
+
 	}
-	
-	private boolean ifAvaliableUpdates() throws IOException
-	{
-		
+
+	private boolean ifAvaliableUpdates() throws IOException {
+
 		URL url = new URL(ukrm_url_link);
 		URLConnection urlConnection = url.openConnection();
 		urlConnection.connect();
@@ -93,25 +86,18 @@ public class Download extends Activity {
 		new_length = new_file_size;
 		File file = new File(ukrm_dir);
 		long old_file_size = file.length();
-		old_length= old_file_size;
-		if(new_file_size>old_file_size)
-		return true;
-		else
-		{
+		old_length = old_file_size;
+		if (new_file_size > old_file_size)
+			return true;
+		else {
 			CreateToast(getString(R.string.update_noneed_toast));
 			finish();
 			return false;
-			
+
 		}
 	}
-	
-	
-	
-	
-	
-	
-	public void CreateToast(String message)
-	{
+
+	public void CreateToast(String message) {
 		Context context = getApplicationContext();
 		CharSequence text = message;
 		int duration = Toast.LENGTH_SHORT;
@@ -139,8 +125,6 @@ public class Download extends Activity {
 			return null;
 		}
 	}
-	
-	
 
 	class DownloadFileAsync extends AsyncTask<String, String, String> {
 
@@ -191,6 +175,7 @@ public class Download extends Activity {
 
 		}
 
+		@Override
 		protected void onProgressUpdate(String... progress) {
 			mProgressDialog.setProgress(Integer.parseInt(progress[0]));
 		}
@@ -202,7 +187,5 @@ public class Download extends Activity {
 			finish();
 		}
 	}
-	
-	
-	
+
 }
