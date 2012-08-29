@@ -10,9 +10,8 @@ public class GlobalState extends Application {
 	private boolean back;
 	private boolean subm;
 	private boolean ifsettingsChanged = false;
-	
+
 	private int NumberOfTests = 12;
-	
 
 	public String getansw() {
 		return answ;
@@ -45,38 +44,37 @@ public class GlobalState extends Application {
 	public void setback(boolean back) {
 		this.back = back;
 	}
-		
-		public boolean getsubm() {
-			return subm;
-		}
 
-		public void setsubm(boolean subm) {
-			this.subm = subm;
-		}	
-		
-		
-		public int getNumberOfTests() {
-			return NumberOfTests;
-		}
-		
-		public void setNumbOfTests(int NumberOfTests){
-			this.NumberOfTests = NumberOfTests;
-		}
-		
-		public boolean getIfSettingsChanged() {
-			return subm;
-		}
+	public boolean getsubm() {
+		return subm;
+	}
 
-		public void setIfSettingsChanged(boolean ifsettingsChanged) {
-			this.setIfsettingsChanged(ifsettingsChanged);
-		}
+	public void setsubm(boolean subm) {
+		this.subm = subm;
+	}
 
-		public boolean isIfsettingsChanged() {
-			return ifsettingsChanged;
-		}
+	public int getNumberOfTests() {
+		return NumberOfTests;
+	}
 
-		public void setIfsettingsChanged(boolean ifsettingsChanged) {
-			this.ifsettingsChanged = ifsettingsChanged;
-		}	
-		
+	public void setNumbOfTests(int NumberOfTests) {
+		this.NumberOfTests = NumberOfTests;
+	}
+
+	public boolean getIfSettingsChanged() {
+		return subm;
+	}
+
+	public void setIfSettingsChanged(boolean ifsettingsChanged) {
+		this.setIfsettingsChanged(ifsettingsChanged);
+	}
+
+	public boolean isIfsettingsChanged() {
+		return ifsettingsChanged;
+	}
+
+	public void setIfsettingsChanged(boolean ifsettingsChanged) {
+		this.ifsettingsChanged = ifsettingsChanged;
+	}
+
 }

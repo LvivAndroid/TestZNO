@@ -17,18 +17,18 @@ public class SubjectSelector extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.subject_selector);
 
-		GradientDrawable gd = (GradientDrawable) getApplicationContext().getResources().getDrawable(R.drawable.grad);
-        Display display = getWindowManager().getDefaultDisplay(); 
-        int width = display.getWidth();
-        int height = display.getHeight();
-    	gd.setGradientRadius((float) (Math.max(width,height)*0.5 + 20));
-		
+		GradientDrawable gd = (GradientDrawable) getApplicationContext()
+				.getResources().getDrawable(R.drawable.grad);
+		Display display = getWindowManager().getDefaultDisplay();
+		int width = display.getWidth();
+		int height = display.getHeight();
+		gd.setGradientRadius((float) (Math.max(width, height) * 0.5 + 20));
+
 	}
 
-	
-
 	public void RunPhysics(View view) {
-		if (checkfile(getString(R.string.ukrm_database_name), getString(R.string.all_databases_path))) {
+		if (checkfile(getString(R.string.ukrm_database_name),
+				getString(R.string.all_databases_path))) {
 			Intent myIntent = new Intent(SubjectSelector.this,
 					ListOfTests.class);
 			/* add info about subject */
@@ -46,6 +46,7 @@ public class SubjectSelector extends Activity {
 					.setCancelable(false)
 					.setPositiveButton(getString(R.string.db_not_found_ok),
 							new DialogInterface.OnClickListener() {
+								@Override
 								public void onClick(DialogInterface dialog,
 										int id) {
 
@@ -57,6 +58,7 @@ public class SubjectSelector extends Activity {
 							})
 					.setNegativeButton(getString(R.string.db_not_found_cancel),
 							new DialogInterface.OnClickListener() {
+								@Override
 								public void onClick(DialogInterface dialog,
 										int id) {
 
@@ -70,7 +72,5 @@ public class SubjectSelector extends Activity {
 
 		return file.exists();
 	}
-	
-	
-	
+
 }

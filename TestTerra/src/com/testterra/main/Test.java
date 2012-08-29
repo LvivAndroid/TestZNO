@@ -16,15 +16,16 @@ public class Test extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
-		
-		//gradient
-		GradientDrawable gd = (GradientDrawable) getApplicationContext().getResources().getDrawable(R.drawable.grad);
-        Display display = getWindowManager().getDefaultDisplay(); 
-        int width = display.getWidth();
-        int height = display.getHeight();
-    	gd.setGradientRadius((float) (Math.max(width,height)*0.5 + 20));
-		
-    	//letters
+
+		// gradient
+		GradientDrawable gd = (GradientDrawable) getApplicationContext()
+				.getResources().getDrawable(R.drawable.grad);
+		Display display = getWindowManager().getDefaultDisplay();
+		int width = display.getWidth();
+		int height = display.getHeight();
+		gd.setGradientRadius((float) (Math.max(width, height) * 0.5 + 20));
+
+		// letters
 		String[] Letters = { "À", "Á", "Â", "Ã", "Ä" };
 		setContentView(R.layout.test);
 		final Intent myIntent = getIntent();
@@ -120,31 +121,30 @@ public class Test extends Activity {
 				+ Integer.toString(Singleton.getInstance().ID + 1));
 		tv = (TextView) findViewById(R.id.Context);
 		tv.setText(Singleton.getInstance().test.statement);
-		tv.setText(Html.fromHtml(tv.getText()+""));
+		tv.setText(Html.fromHtml(tv.getText() + ""));
 		tv = (TextView) findViewById(R.id.ansA);
 		tv.setText("A) " + Singleton.getInstance().test.A_answer);
-		tv.setText(Html.fromHtml(tv.getText()+""));
+		tv.setText(Html.fromHtml(tv.getText() + ""));
 		tv = (TextView) findViewById(R.id.ansB);
 		tv.setText("Á) " + Singleton.getInstance().test.B_answer);
-		tv.setText(Html.fromHtml(tv.getText()+""));
+		tv.setText(Html.fromHtml(tv.getText() + ""));
 		tv = (TextView) findViewById(R.id.ansC);
 		tv.setText("Â) " + Singleton.getInstance().test.C_answer);
-		tv.setText(Html.fromHtml(tv.getText()+""));
+		tv.setText(Html.fromHtml(tv.getText() + ""));
 		tv = (TextView) findViewById(R.id.ansD);
 		tv.setText("Ã) " + Singleton.getInstance().test.D_answer);
-		tv.setText(Html.fromHtml(tv.getText()+""));
+		tv.setText(Html.fromHtml(tv.getText() + ""));
 		tv = (TextView) findViewById(R.id.ansE);
 		tv.setText("Ä) " + Singleton.getInstance().test.E_answer);
-		tv.setText(Html.fromHtml(tv.getText()+""));
+		tv.setText(Html.fromHtml(tv.getText() + ""));
 	}
 
+	@Override
 	public void onBackPressed() {
 		GlobalState gs = (GlobalState) getApplication();
 		gs.setback(false);
 		setResult(RESULT_OK);
 		finish();
 	}
-
-	
 
 }

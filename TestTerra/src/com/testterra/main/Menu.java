@@ -53,6 +53,7 @@ public class Menu extends Activity {
 					.setCancelable(false)
 					.setPositiveButton(R.string.update_dialog_yes,
 							new DialogInterface.OnClickListener() {
+								@Override
 								public void onClick(DialogInterface dialog,
 										int id) {
 									Intent myIntent = new Intent(Menu.this,
@@ -62,6 +63,7 @@ public class Menu extends Activity {
 							})
 					.setNegativeButton(R.string.update_dialog_no,
 							new DialogInterface.OnClickListener() {
+								@Override
 								public void onClick(DialogInterface dialog,
 										int id) {
 
@@ -139,12 +141,14 @@ public class Menu extends Activity {
 		}
 	}
 
+	@Override
 	public void onBackPressed() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(Menu.this);
 		builder.setMessage(getString(R.string.onback_press_dialog_message))
 				.setCancelable(false)
 				.setPositiveButton(getString(R.string.onback_press_dialog_yes),
 						new DialogInterface.OnClickListener() {
+							@Override
 							public void onClick(DialogInterface dialog, int id) {
 								Singleton.getInstance().call_on_create = true;
 								Menu.this.finish();
@@ -152,6 +156,7 @@ public class Menu extends Activity {
 						})
 				.setNegativeButton(getString(R.string.onback_press_dialog_no),
 						new DialogInterface.OnClickListener() {
+							@Override
 							public void onClick(DialogInterface dialog, int id) {
 
 							}

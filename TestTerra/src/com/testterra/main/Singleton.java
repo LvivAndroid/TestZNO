@@ -6,11 +6,17 @@ public class Singleton {
 	int ID;
 	int ALL_TESTS;
 	boolean call_on_create;
-	private Singleton() {call_on_create=true; test = new MyTest(); ID=0;}
+
+	private Singleton() {
+		call_on_create = true;
+		test = new MyTest();
+		ID = 0;
+	}
+
 	public static Singleton getInstance() {
-		if( instance == null )
+		if (instance == null)
 			instance = new Singleton();
 		return instance;
 	}
-	
+
 }

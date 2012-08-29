@@ -10,8 +10,6 @@ import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
 
-
-
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -25,6 +23,7 @@ import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
@@ -33,18 +32,16 @@ import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
 
-
 public class ListOfTests extends Activity {
 
-	
 	public int NumberOfTests;
 
 	/* HAAWA's CONSTS */
 
 	public int score = 0;
 	public int count = 0;
-	
-	public MyTest[]   tests;
+
+	public MyTest[] tests;
 	public CheckBox[] TestCB;
 	public TextView[] TestTV;
 	public TextView[] LettersTV;
@@ -67,34 +64,33 @@ public class ListOfTests extends Activity {
 		setContentView(R.layout.list_of_tests);
 		AlternativeDB alt = new AlternativeDB(this);
 		alt.open();
-		
+
 		NumberOfTests = Integer.parseInt(alt.getKEY_Numb(1));
 		alt.close();
 		TestCB = new CheckBox[NumberOfTests];
 		TestTV = new TextView[NumberOfTests];
 		LettersTV = new TextView[NumberOfTests];
 		Corr = new TextView[NumberOfTests];
-		
-		//SV = new ScrollView(this);
+
+		// SV = new ScrollView(this);
 		TL = new TableLayout(this);
-		TableLayout.LayoutParams TR_layout_params = new TableLayout.LayoutParams(TableLayout.LayoutParams.FILL_PARENT, TableLayout.LayoutParams.WRAP_CONTENT,1f);
-		TR_layout_params.setMargins(4,4,4,4);
+		TableLayout.LayoutParams TR_layout_params = new TableLayout.LayoutParams(
+				LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT, 1f);
+		TR_layout_params.setMargins(4, 4, 4, 4);
 		TL.setLayoutParams(TR_layout_params);
 		TL.setBackgroundColor(Color.WHITE);
-		
+
 		LL = new LinearLayout(this);
 		SV = new ScrollView(this);
 		SV.setBackgroundColor(Color.WHITE);
-		
-		
-		
-		
-		GradientDrawable gd = (GradientDrawable) getApplicationContext().getResources().getDrawable(R.drawable.grad);
-        Display display = getWindowManager().getDefaultDisplay(); 
-        int width = display.getWidth();
-        int height = display.getHeight();
-    	gd.setGradientRadius((float) (Math.max(width,height)*0.5 + 20));
-		
+
+		GradientDrawable gd = (GradientDrawable) getApplicationContext()
+				.getResources().getDrawable(R.drawable.grad);
+		Display display = getWindowManager().getDefaultDisplay();
+		int width = display.getWidth();
+		int height = display.getHeight();
+		gd.setGradientRadius((float) (Math.max(width, height) * 0.5 + 20));
+
 		Singleton.getInstance().ALL_TESTS = NumberOfTests;
 		if (Singleton.getInstance().call_on_create)
 			Singleton.getInstance().call_on_create = false;
@@ -120,7 +116,6 @@ public class ListOfTests extends Activity {
 
 		// КІНЕЦЬ: Перевірка орієнтації екрану,-> пошук ширини і висоти екрану
 
-		
 		/*
 		 * тут потрібно витягти з Bundle імя + розширення файлу, з якого
 		 * зчитуватимемо тести
@@ -133,12 +128,11 @@ public class ListOfTests extends Activity {
 		gs.setback(true);
 		gs.setsubm(true);
 
-		
-		for(int i =0;i<NumberOfTests;i++){
-			
+		for (int i = 0; i < NumberOfTests; i++) {
+
 			TableRow TR = new TableRow(this);
 			TR.setGravity(Gravity.CENTER);
-			
+
 			// Creating checkboxes
 			TestCB[i] = new CheckBox(this);
 			TestCB[i].setVisibility(4);
@@ -147,19 +141,17 @@ public class ListOfTests extends Activity {
 			TestCB[i].setEnabled(true);
 			TestCB[i].setGravity(Gravity.CENTER);
 			TestCB[i].setBackgroundResource(R.drawable.bg_head);
-			 
- 			TestCB[i].setPadding(TestCB[i].getPaddingLeft() + (int)(10),
- 					TestCB[i].getPaddingTop(),
- 					TestCB[i].getPaddingRight(),
- 					TestCB[i].getPaddingBottom());
- 			
- 			//
-			
- 			
- 			// Creating name TextViews
+
+			TestCB[i].setPadding(TestCB[i].getPaddingLeft() + (10),
+					TestCB[i].getPaddingTop(), TestCB[i].getPaddingRight(),
+					TestCB[i].getPaddingBottom());
+
+			//
+
+			// Creating name TextViews
 			TestTV[i] = new TextView(this);
 			TestTV[i].setGravity(Gravity.CENTER);
-			TestTV[i].setText(" Завдання "+(i+1)+" ");
+			TestTV[i].setText(" Завдання " + (i + 1) + " ");
 			TestTV[i].setBackgroundResource(R.drawable.bg_head);
 			final int temp = i;
 			TestTV[i].setOnClickListener(new OnClickListener() {
@@ -172,35 +164,33 @@ public class ListOfTests extends Activity {
 				}
 			});
 			//
-			
-			//Creating Letters TextViews
+
+			// Creating Letters TextViews
 			LettersTV[i] = new TextView(this);
 			LettersTV[i].setText("");
 			LettersTV[i].setGravity(Gravity.CENTER);
 			LettersTV[i].setBackgroundResource(R.drawable.bg_tail);
 			//
-			
-			
-			//Creating TextViews with correct answers
+
+			// Creating TextViews with correct answers
 			Corr[i] = new TextView(this);
 			Corr[i].setText("");
 			Corr[i].setGravity(Gravity.CENTER);
 			Corr[i].setVisibility(4);
 			Corr[i].setBackgroundResource(R.drawable.bg_tail);
 			//
-			
-			
-			//Ієрархія View
-			TR.addView(TestCB[i],(int) 60 * width / 480,(int) 60 * height / 800);
-			TR.addView(TestTV[i],(int) 260 * width / 480,(int) 60 * height / 800);
-			TR.addView(LettersTV[i],(int) 60 * width / 480,(int) 60 * height / 800);
-			TR.addView(Corr[i],(int) 60 * width / 480,(int) 60 * height / 800);
+
+			// Ієрархія View
+			TR.addView(TestCB[i], 60 * width / 480, 60 * height / 800);
+			TR.addView(TestTV[i], 260 * width / 480, 60 * height / 800);
+			TR.addView(LettersTV[i], 60 * width / 480, 60 * height / 800);
+			TR.addView(Corr[i], 60 * width / 480, 60 * height / 800);
 			TL.addView(TR);
 			//
 		}
-		
+
 		LL.addView(TL);
-		
+
 		Submit = new Button(this);
 		Submit.setText("Звірити результати");
 		Submit.setOnClickListener(new OnClickListener() {
@@ -218,7 +208,7 @@ public class ListOfTests extends Activity {
 					}
 
 					for (int i = 0; i < NumberOfTests; i++) {
-						
+
 						TestCB[i].setVisibility(0);
 						TestCB[i].setGravity(Gravity.CENTER_HORIZONTAL);
 						Corr[i].setVisibility(0);
@@ -234,6 +224,7 @@ public class ListOfTests extends Activity {
 							.setCancelable(false)
 							.setPositiveButton("OK",
 									new DialogInterface.OnClickListener() {
+										@Override
 										public void onClick(
 												DialogInterface dialog, int id) {
 
@@ -252,7 +243,7 @@ public class ListOfTests extends Activity {
 
 			}
 		});
-		
+
 		LL.setOrientation(LinearLayout.VERTICAL);
 		LL.addView(Submit);
 		// створення двох останніх тейбл ролів, один просто пустота а другий з
@@ -270,14 +261,14 @@ public class ListOfTests extends Activity {
 	}
 
 	void GenereteListOfTests() {
-		
-		
+
 		int amount_of_tests = 24;
 		Boolean[] used = new Boolean[amount_of_tests];
 		for (int i = 0; i < amount_of_tests; i++)
 			used[i] = false;
-		
-		int[] WhatTests = new int[NumberOfTests]; // номери тестів, які увійшли до набору
+
+		int[] WhatTests = new int[NumberOfTests]; // номери тестів, які увійшли
+													// до набору
 		int added = 0;
 		while (added < NumberOfTests) {
 			int tmp = generRandom(amount_of_tests - added + 1);
@@ -300,11 +291,11 @@ public class ListOfTests extends Activity {
 		}
 		Helper H = new Helper(this);
 		H.open();
-		
-		for(int i=0;i<NumberOfTests;i++)
+
+		for (int i = 0; i < NumberOfTests; i++)
 			tests[i] = new MyTest();
-		for(int i=0;i<NumberOfTests;i++) {
-			int index = WhatTests[i]+1;
+		for (int i = 0; i < NumberOfTests; i++) {
+			int index = WhatTests[i] + 1;
 			tests[i].statement = H.getKEY_TEST(index);
 			tests[i].A_answer = H.getKEY_A_answer(index);
 			tests[i].B_answer = H.getKEY_B_answer(index);
@@ -380,6 +371,7 @@ public class ListOfTests extends Activity {
 		}
 	}
 
+	@Override
 	public void onBackPressed() {
 		AlertDialog.Builder builder = new AlertDialog.Builder(ListOfTests.this);
 		builder.setMessage(
@@ -387,6 +379,7 @@ public class ListOfTests extends Activity {
 				.setCancelable(false)
 				.setPositiveButton("Вихід",
 						new DialogInterface.OnClickListener() {
+							@Override
 							public void onClick(DialogInterface dialog, int id) {
 								Singleton.getInstance().call_on_create = true;
 								ListOfTests.this.finish();
@@ -394,6 +387,7 @@ public class ListOfTests extends Activity {
 						})
 				.setNegativeButton("Скасувати",
 						new DialogInterface.OnClickListener() {
+							@Override
 							public void onClick(DialogInterface dialog, int id) {
 
 							}
@@ -404,46 +398,47 @@ public class ListOfTests extends Activity {
 	}
 
 	/* end HAAWA's CODE */
-	
+
 	public boolean isExternalStorageAvailable() {
-        boolean state = false;
-        String extStorageState = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED.equals(extStorageState)) {
-            state = true;
-        }
-        return state;
-    }
-	
+		boolean state = false;
+		String extStorageState = Environment.getExternalStorageState();
+		if (Environment.MEDIA_MOUNTED.equals(extStorageState)) {
+			state = true;
+		}
+		return state;
+	}
+
 	// Helper Method to Test if external Storage is read only
-    public boolean isExternalStorageReadOnly() {
-        boolean state = false;
-        String extStorageState = Environment.getExternalStorageState();
-        if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)) {
-            state = true;
-        }
-        return state;
-    }
-	
-    private String GetDate() {
-    	String today = "";
-    	Date date = new Date();
-        today += Integer.toString(date.getYear() + 1900) + '/';
-        today += Integer.toString(date.getMonth() + 1) + '/';
-        today += Integer.toString(date.getDate() );
-        return today;
-    }
+	public boolean isExternalStorageReadOnly() {
+		boolean state = false;
+		String extStorageState = Environment.getExternalStorageState();
+		if (Environment.MEDIA_MOUNTED_READ_ONLY.equals(extStorageState)) {
+			state = true;
+		}
+		return state;
+	}
+
+	private String GetDate() {
+		String today = "";
+		Date date = new Date();
+		today += Integer.toString(date.getYear() + 1900) + '/';
+		today += Integer.toString(date.getMonth() + 1) + '/';
+		today += Integer.toString(date.getDate());
+		return today;
+	}
 
 	private void AddNewScore(int Score) {
-		if( !isExternalStorageAvailable() || isExternalStorageReadOnly() )
+		if (!isExternalStorageAvailable() || isExternalStorageReadOnly())
 			return;
 		String dates[] = null;
 		int values[] = null;
-		String path = Environment.getExternalStorageDirectory() + File.separator;
-        String MY_FILE = path + R.string.scoreFile;
-        int n;
-        String add;
-        
-        /* read old data */
+		String path = Environment.getExternalStorageDirectory()
+				+ File.separator;
+		String MY_FILE = path + R.string.scoreFile;
+		int n;
+		String add;
+
+		/* read old data */
 		try {
 			Scanner s = new Scanner(new FileReader(MY_FILE));
 			n = s.nextInt();
@@ -460,21 +455,21 @@ public class ListOfTests extends Activity {
 			e.printStackTrace();
 		}
 		add = Integer.toString(Score) + " " + GetDate();
-		
+
 		/* write new data */
 		BufferedWriter out;
 		try {
 			out = new BufferedWriter(new FileWriter(MY_FILE));
 			out.write(Integer.toString(n) + "\n");
-			for(int i=0;i<n-1;i++)
+			for (int i = 0; i < n - 1; i++)
 				out.write(Integer.toString(values[i]) + dates[i] + "\n");
 			out.write(add);
 			out.close();
 		} catch (IOException e) {
-			//TODO something went wrong
+			// TODO something went wrong
 			e.printStackTrace();
 		}
-        
+
 	}
 
 }
