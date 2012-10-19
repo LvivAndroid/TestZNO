@@ -19,6 +19,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -62,11 +63,13 @@ public class ListOfTests extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_of_tests);
+		Log.i("#LOT","0");
 		AlternativeDB alt = new AlternativeDB(this);
 		alt.open();
-
+		Log.i("#LOT","1");
 		NumberOfTests = Integer.parseInt(alt.getKEY_Numb(1));
 		alt.close();
+		NumberOfTests = 12;
 		TestCB = new CheckBox[NumberOfTests];
 		TestTV = new TextView[NumberOfTests];
 		LettersTV = new TextView[NumberOfTests];
@@ -96,7 +99,7 @@ public class ListOfTests extends Activity {
 			Singleton.getInstance().call_on_create = false;
 		else
 			return;
-
+		Log.i("#LOT","2");
 		// ПОЧАТОК: Перевірка орієнтації екрану,-> пошук ширини і висоти екрану
 
 		DisplayMetrics metrics = new DisplayMetrics();
@@ -120,9 +123,11 @@ public class ListOfTests extends Activity {
 		 * тут потрібно витягти з Bundle імя + розширення файлу, з якого
 		 * зчитуватимемо тести
 		 */
-
+		Log.i("#LOT","3");
 		tests = new MyTest[NumberOfTests];
+		Log.i("#LOT","3.1");
 		GenereteListOfTests();
+		Log.i("#LOT","3.2");
 		/* HAAWA's CODE */
 		GlobalState gs = (GlobalState) getApplication();
 		gs.setback(true);
@@ -158,12 +163,9 @@ public class ListOfTests extends Activity {
 
 				@Override
 				public void onClick(View v) {
-					// TODO Auto-generated method stub
 					OpenTest(temp);
-
 				}
 			});
-			//
 
 			// Creating Letters TextViews
 			LettersTV[i] = new TextView(this);
@@ -191,13 +193,14 @@ public class ListOfTests extends Activity {
 
 		LL.addView(TL);
 
+		Log.i("#LOT","4");
+		
 		Submit = new Button(this);
 		Submit.setText("Звірити результати");
 		Submit.setOnClickListener(new OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
-				// TODO Auto-generated method stub
 				GlobalState gs = (GlobalState) getApplication();
 				if (gs.getsubm()) {
 					AddNewScore(score);
@@ -243,6 +246,8 @@ public class ListOfTests extends Activity {
 
 			}
 		});
+		
+		Log.i("#LOT","5");
 
 		LL.setOrientation(LinearLayout.VERTICAL);
 		LL.addView(Submit);
@@ -289,9 +294,10 @@ public class ListOfTests extends Activity {
 			WhatTests[added] = it;
 			added++;
 		}
+		Log.i("#LOT","x1");
 		Helper H = new Helper(this);
 		H.open();
-
+		Log.i("#LOT","x2");
 		for (int i = 0; i < NumberOfTests; i++)
 			tests[i] = new MyTest();
 		for (int i = 0; i < NumberOfTests; i++) {
@@ -302,9 +308,13 @@ public class ListOfTests extends Activity {
 			tests[i].C_answer = H.getKEY_C_answer(index);
 			tests[i].D_answer = H.getKEY_D_answer(index);
 			tests[i].E_answer = H.getKEY_E_answer(index);
+			Log.i("#LOT","x2.1");
 			tests[i].correct_answer = H.getKEY_CORRECT(index);
+			Log.i("#LOT","x2.3");
 			tests[i].Eans = H.getKEY_IFEEXISTS(index);
+			Log.i("#LOT","x3");
 		}
+		
 		H.close();
 	}
 
@@ -321,14 +331,12 @@ public class ListOfTests extends Activity {
 
 	@Override
 	protected void onPause() {
-		// TODO Auto-generated method stub
 		super.onPause();
 
 	}
 
 	@Override
 	protected void onResume() {
-		// TODO Auto-generated method stub
 
 		super.onResume();
 		count++;
@@ -466,7 +474,6 @@ public class ListOfTests extends Activity {
 			out.write(add);
 			out.close();
 		} catch (IOException e) {
-			// TODO something went wrong
 			e.printStackTrace();
 		}
 
