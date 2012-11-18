@@ -99,7 +99,8 @@ public class Test extends Activity {
 
 		Button EBut = (Button) findViewById(R.id.EBut);
 		EBut.setEnabled(Singleton.getInstance().test.Eans);
-		
+		if (!gs.getsubm())
+			EBut.setEnabled(false);
 		EBut.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
