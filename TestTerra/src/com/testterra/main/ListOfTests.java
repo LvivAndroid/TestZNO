@@ -34,7 +34,7 @@ import android.widget.TextView;
 
 public class ListOfTests extends Activity {
 
-	final int NumberOfTests = 5;
+	int NumberOfTests ;
 	private int DbSize;
 	/* HAAWA's CONSTS */
 
@@ -67,6 +67,8 @@ public class ListOfTests extends Activity {
 		DbSize = (int) H.getSize();
 		H.close();
 		
+		NumberOfTests = getNumbOfTest();
+		
 		TestTV = new TextView[NumberOfTests];
 		LettersTV = new TextView[NumberOfTests];
 		Corr = new TextView[NumberOfTests];
@@ -77,11 +79,11 @@ public class ListOfTests extends Activity {
 				LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT, 1f);
 		TR_layout_params.setMargins(4, 4, 4, 4);
 		TL.setLayoutParams(TR_layout_params);
-		TL.setBackgroundColor(Color.WHITE);
-
+		//TL.setBackgroundColor(Color.WHITE);
+		TL.setGravity(Gravity.CENTER);
 		LL = new LinearLayout(this);
 		SV = new ScrollView(this);
-		SV.setBackgroundColor(Color.WHITE);
+		//SV.setBackgroundColor(Color.WHITE);
 
 		GradientDrawable gd = (GradientDrawable) getApplicationContext()
 				.getResources().getDrawable(R.drawable.grad);
@@ -89,7 +91,7 @@ public class ListOfTests extends Activity {
 		int width = display.getWidth();
 		int height = display.getHeight();
 		gd.setGradientRadius((float) (Math.max(width, height) * 0.5 + 20));
-
+		
 		Singleton.getInstance().ALL_TESTS = NumberOfTests;
 		if (Singleton.getInstance().call_on_create)
 			Singleton.getInstance().call_on_create = false;
@@ -128,6 +130,7 @@ public class ListOfTests extends Activity {
 
 			TableRow TR = new TableRow(this);
 			TR.setGravity(Gravity.CENTER);
+			//TR.setBackgroundDrawable(gd);
 
 			// Creating name TextViews
 			TestTV[i] = new TextView(this);
@@ -169,10 +172,9 @@ public class ListOfTests extends Activity {
 			TR.addView(LettersTV[i], 60 * width / 480, 60 * height / 800);
 			TR.addView(Corr[i], 60 * width / 480, 60 * height / 800);
 			TL.addView(TR);
-			//
 		}
 
-		LL.addView(TL);
+		//LL.addView(TL);
 		
 		Submit = new Button(this);
 		Submit.setText("Звірити результати");
@@ -199,7 +201,7 @@ public class ListOfTests extends Activity {
 							Corr[i].setBackgroundResource(R.drawable.bg_tail_red);
 						}
 					}
-					AddNewScore(score);
+					AddNewScore(score, NumberOfTests);
 					
 					for (int i = 0; i < NumberOfTests; i++) {
 						Corr[i].setVisibility(0);
@@ -233,12 +235,13 @@ public class ListOfTests extends Activity {
 
 			}
 		});
-
+		TableRow TR = new TableRow(this);
+		TR.setGravity(Gravity.CENTER);
+		
+		TL.addView(Submit, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+		SV.setBackgroundDrawable(gd);
+		LL.addView(TL);
 		LL.setOrientation(LinearLayout.VERTICAL);
-		LL.addView(Submit);
-		// створення двох останніх тейбл ролів, один просто пустота а другий з
-		// кнопкою сабміт
-
 		SV.addView(LL);
 
 		super.setContentView(SV);
@@ -389,16 +392,27 @@ public class ListOfTests extends Activity {
 		return today;
 	}
 
-	private void AddNewScore(int Score) {
+	private void AddNewScore(int Score, int N_Tests) {
 		if (!isExternalStorageAvailable() || isExternalStorageReadOnly())
 			return;
 		String dates[] = null;
 		int values[] = null;
+		int outof[] = null;
 		String path = Environment.getExternalStorageDirectory()
 				+ File.separator;
 		String MY_FILE = path + R.string.scoreFile;
 		int n;
 		String add;
+		/*
+		//clean up old type of file
+		BufferedWriter out2;
+		try {
+			out2 = new BufferedWriter(new FileWriter(MY_FILE));
+			out2.write("0\n");out2.close();
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}*/
+		
 
 		/* read old data */
 		try {
@@ -406,8 +420,10 @@ public class ListOfTests extends Activity {
 			n = s.nextInt();
 			dates = new String[n];
 			values = new int[n];
+			outof = new int[n];
 			for (int i = 0; i < n; ++i) {
 				values[i] = s.nextInt();
+				outof[i] = s.nextInt();
 				dates[i] = s.nextLine();
 			}
 			s.close();
@@ -416,21 +432,37 @@ public class ListOfTests extends Activity {
 			n = 1;
 			e.printStackTrace();
 		}
-		add = Integer.toString(Score) + " " + GetDate();
+		add = Integer.toString(Score) + " " + Integer.toString(N_Tests) + " " + GetDate();
 
 		/* write new data */
 		BufferedWriter out;
+		
+		
+		
 		try {
 			out = new BufferedWriter(new FileWriter(MY_FILE));
 			out.write(Integer.toString(n) + "\n");
 			for (int i = 0; i < n - 1; i++)
-				out.write(Integer.toString(values[i]) + dates[i] + "\n");
+				out.write(Integer.toString(values[i]) + " " + Integer.toString(outof[i]) + dates[i] + "\n");
 			out.write(add);
 			out.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
+	}
+	
+	int getNumbOfTest() {
+		final AlternativeDB alt;
+		alt = new AlternativeDB(this);
+		alt.open();
+		int res = 5;
+		if (Integer.parseInt(alt.getKEY_Numb(1)) == 10)
+			res = 10;
+		else
+			res = 15;
+		alt.close();
+		return res;
 	}
 
 }

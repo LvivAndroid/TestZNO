@@ -1,8 +1,11 @@
 package com.testterra.main;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.Scanner;
 
 import android.app.Activity;
@@ -16,6 +19,7 @@ public class Statistic extends Activity {
 
 	String dates[];
 	int values[];
+	int outof[];
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -65,27 +69,28 @@ public class Statistic extends Activity {
 			int n = s.nextInt();
 			dates = new String[n];
 			values = new int[n];
+			outof = new int[n];
 			int idx = 0;
 			for (int i = 0; i < n; ++i) {
 				values[i] = s.nextInt();
+				outof[i] = s.nextInt();
 				dates[i] = s.nextLine();
 				if (values[i] > values[idx])
 					idx = i;
 			}
 			s.close();
 
-			int all_tests = 5;
 			TextView tmp_tv = (TextView) findViewById(R.id.Title);
 			tmp_tv.setVisibility(1);
 			tmp_tv = (TextView) findViewById(R.id.fullTable);
 			tmp_tv.setVisibility(1);
 			tmp_tv = (TextView) findViewById(R.id.maxScore);
-			tmp_tv.setText(values[idx] + " бали(-ів) з " + all_tests + ", "
+			tmp_tv.setText(values[idx] + " бали(-ів) з " + outof[idx] + ", "
 					+ dates[idx]);
 			String show = "";
 
 			for (int i = 0; i < n; i++) {
-				show += values[i] + " бали(-ів) з " + all_tests + ", "
+				show += values[i] + " бали(-ів) з " + outof[i] + ", "
 						+ dates[i] + "\n";
 			}
 			tmp_tv = (TextView) findViewById(R.id.allResults);
@@ -93,6 +98,15 @@ public class Statistic extends Activity {
 		} catch (FileNotFoundException e) {
 			TextView maxScore = (TextView) findViewById(R.id.maxScore);
 			maxScore.setText("Досі Ви не проходили тестування");
+			
+			BufferedWriter out2;
+			try {
+				out2 = new BufferedWriter(new FileWriter(MY_FILE));
+				out2.write("0\n");out2.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			
 			e.printStackTrace();
 		}
 	}

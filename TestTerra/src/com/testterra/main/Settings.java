@@ -29,11 +29,12 @@ public class Settings extends Activity {
 		final RadioButton TestAmount1 = (RadioButton) findViewById(R.id.TestAmount1);
 		final RadioButton TestAmount2 = (RadioButton) findViewById(R.id.TestAmount2);
 
+		
 		AlternativeDB alt1 = new AlternativeDB(this);
 
 		alt1.open();
 		Log.d("set", alt1.getKEY_Numb(1));
-		if (Integer.parseInt(alt1.getKEY_Numb(1)) == 12)
+		if (Integer.parseInt(alt1.getKEY_Numb(1)) == 10)
 			TestAmount1.setChecked(true);
 		else
 			TestAmount2.setChecked(true);
@@ -49,13 +50,13 @@ public class Settings extends Activity {
 			@Override
 			public void onClick(View v) {
 				// TODO Auto-generated method stub
-
+				
 				alt.open();
 
 				if (TestAmount1.isChecked())
-					alt.DBexec(12);
+					alt.DBexec(10);
 				else
-					alt.DBexec(20);
+					alt.DBexec(15);
 
 				Log.d("Settings", alt.getKEY_Numb(1) + " ->  to DB");
 
@@ -64,5 +65,5 @@ public class Settings extends Activity {
 			}
 		});
 	}
-
+	
 }

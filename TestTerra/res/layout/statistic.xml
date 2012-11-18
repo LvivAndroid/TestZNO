@@ -8,7 +8,7 @@
     >
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:background="@drawable/grad"
+    
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
