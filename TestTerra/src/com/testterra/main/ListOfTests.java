@@ -20,7 +20,6 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -276,7 +275,6 @@ public class ListOfTests extends Activity {
 					it = 0;
 			}
 			it = (it - 1 + amount_of_tests) % amount_of_tests;
-			Log.i("#LIT", Integer.toString(it));
 			used[it] = true;
 			WhatTests[added] = it;
 			added++;
