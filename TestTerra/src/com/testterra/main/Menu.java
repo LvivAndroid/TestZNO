@@ -132,7 +132,7 @@ public class Menu extends Activity {
 			return true;
 		}
 		case R.id.DownloadsItem: {
-			Intent myIntent = new Intent(getString(R.string.package_name));
+			Intent myIntent = new Intent(Menu.this, Download.class);
 			startActivity(myIntent);
 			return true;
 		}

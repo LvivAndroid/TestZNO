@@ -3,9 +3,9 @@ package com.testterra.main;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.FileReader;
 import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
@@ -15,18 +15,17 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
-import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.widget.ScrollView;
 import android.widget.TableLayout;
@@ -43,7 +42,6 @@ public class ListOfTests extends Activity {
 	public int count = 0;
 
 	public MyTest[] tests;
-	public CheckBox[] TestCB;
 	public TextView[] TestTV;
 	public TextView[] LettersTV;
 	public TextView[] Corr;
@@ -63,14 +61,11 @@ public class ListOfTests extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_of_tests);
-		Log.i("#LOT","0");
 		AlternativeDB alt = new AlternativeDB(this);
 		alt.open();
-		Log.i("#LOT","1");
 		NumberOfTests = Integer.parseInt(alt.getKEY_Numb(1));
 		alt.close();
 		NumberOfTests = 12;
-		TestCB = new CheckBox[NumberOfTests];
 		TestTV = new TextView[NumberOfTests];
 		LettersTV = new TextView[NumberOfTests];
 		Corr = new TextView[NumberOfTests];
@@ -99,7 +94,6 @@ public class ListOfTests extends Activity {
 			Singleton.getInstance().call_on_create = false;
 		else
 			return;
-		Log.i("#LOT","2");
 		// ПОЧАТОК: Перевірка орієнтації екрану,-> пошук ширини і висоти екрану
 
 		DisplayMetrics metrics = new DisplayMetrics();
@@ -123,14 +117,10 @@ public class ListOfTests extends Activity {
 		 * тут потрібно витягти з Bundle імя + розширення файлу, з якого
 		 * зчитуватимемо тести
 		 */
-		Log.i("#LOT","3");
 		tests = new MyTest[NumberOfTests];
-		Log.i("#LOT","3.1");
 		GenereteListOfTests();
-		Log.i("#LOT","3.2");
 		/* HAAWA's CODE */
 		GlobalState gs = (GlobalState) getApplication();
-		gs.setback(true);
 		gs.setsubm(true);
 
 		for (int i = 0; i < NumberOfTests; i++) {
@@ -138,25 +128,12 @@ public class ListOfTests extends Activity {
 			TableRow TR = new TableRow(this);
 			TR.setGravity(Gravity.CENTER);
 
-			// Creating checkboxes
-			TestCB[i] = new CheckBox(this);
-			TestCB[i].setVisibility(4);
-			TestCB[i].setChecked(false);
-			TestCB[i].setClickable(false);
-			TestCB[i].setEnabled(true);
-			TestCB[i].setGravity(Gravity.CENTER);
-			TestCB[i].setBackgroundResource(R.drawable.bg_head);
-
-			TestCB[i].setPadding(TestCB[i].getPaddingLeft() + (10),
-					TestCB[i].getPaddingTop(), TestCB[i].getPaddingRight(),
-					TestCB[i].getPaddingBottom());
-
-			//
-
 			// Creating name TextViews
 			TestTV[i] = new TextView(this);
 			TestTV[i].setGravity(Gravity.CENTER);
 			TestTV[i].setText(" Завдання " + (i + 1) + " ");
+			TestTV[i].setTextColor(Color.WHITE);
+			TestTV[i].setTypeface(null, Typeface.BOLD);
 			TestTV[i].setBackgroundResource(R.drawable.bg_head);
 			final int temp = i;
 			TestTV[i].setOnClickListener(new OnClickListener() {
@@ -170,6 +147,8 @@ public class ListOfTests extends Activity {
 			// Creating Letters TextViews
 			LettersTV[i] = new TextView(this);
 			LettersTV[i].setText("");
+			LettersTV[i].setTextColor(Color.WHITE);
+			LettersTV[i].setTypeface(null, Typeface.BOLD);
 			LettersTV[i].setGravity(Gravity.CENTER);
 			LettersTV[i].setBackgroundResource(R.drawable.bg_tail);
 			//
@@ -177,13 +156,14 @@ public class ListOfTests extends Activity {
 			// Creating TextViews with correct answers
 			Corr[i] = new TextView(this);
 			Corr[i].setText("");
+			Corr[i].setTextColor(Color.WHITE);
+			Corr[i].setTypeface(null, Typeface.BOLD);
 			Corr[i].setGravity(Gravity.CENTER);
 			Corr[i].setVisibility(4);
 			Corr[i].setBackgroundResource(R.drawable.bg_tail);
 			//
 
 			// Ієрархія View
-			TR.addView(TestCB[i], 60 * width / 480, 60 * height / 800);
 			TR.addView(TestTV[i], 260 * width / 480, 60 * height / 800);
 			TR.addView(LettersTV[i], 60 * width / 480, 60 * height / 800);
 			TR.addView(Corr[i], 60 * width / 480, 60 * height / 800);
@@ -192,8 +172,6 @@ public class ListOfTests extends Activity {
 		}
 
 		LL.addView(TL);
-
-		Log.i("#LOT","4");
 		
 		Submit = new Button(this);
 		Submit.setText("Звірити результати");
@@ -203,20 +181,28 @@ public class ListOfTests extends Activity {
 			public void onClick(View v) {
 				GlobalState gs = (GlobalState) getApplication();
 				if (gs.getsubm()) {
-					AddNewScore(score);
+					
 					Submit.setText("Вихід");
 					String[] Letters = { "А", "Б", "В", "Г", "Д" };
 					for (int i = 0; i < NumberOfTests; i++) {
 						Corr[i].setText(Letters[tests[i].correct_answer]);
+						if(Corr[i].getText().toString().equals(LettersTV[i].getText().toString())) {
+							score++;
+							TestTV[i].setBackgroundResource(R.drawable.bg_head_green);
+							LettersTV[i].setBackgroundResource(R.drawable.bg_mid_green);
+							Corr[i].setBackgroundResource(R.drawable.bg_tail_green);
+						}
+						else {
+							TestTV[i].setBackgroundResource(R.drawable.bg_head_red);
+							LettersTV[i].setBackgroundResource(R.drawable.bg_mid_red);
+							Corr[i].setBackgroundResource(R.drawable.bg_tail_red);
+						}
 					}
-
+					AddNewScore(score);
+					
 					for (int i = 0; i < NumberOfTests; i++) {
-
-						TestCB[i].setVisibility(0);
-						TestCB[i].setGravity(Gravity.CENTER_HORIZONTAL);
 						Corr[i].setVisibility(0);
-						LettersTV[i].setBackgroundResource(R.drawable.bg_mid);
-						TestTV[i].setBackgroundResource(R.drawable.bg_mid);
+						//LettersTV[i].setBackgroundResource(R.drawable.bg_mid);
 					}
 
 					AlertDialog.Builder builder = new AlertDialog.Builder(
@@ -246,8 +232,6 @@ public class ListOfTests extends Activity {
 
 			}
 		});
-		
-		Log.i("#LOT","5");
 
 		LL.setOrientation(LinearLayout.VERTICAL);
 		LL.addView(Submit);
@@ -294,10 +278,8 @@ public class ListOfTests extends Activity {
 			WhatTests[added] = it;
 			added++;
 		}
-		Log.i("#LOT","x1");
 		Helper H = new Helper(this);
 		H.open();
-		Log.i("#LOT","x2");
 		for (int i = 0; i < NumberOfTests; i++)
 			tests[i] = new MyTest();
 		for (int i = 0; i < NumberOfTests; i++) {
@@ -308,11 +290,8 @@ public class ListOfTests extends Activity {
 			tests[i].C_answer = H.getKEY_C_answer(index);
 			tests[i].D_answer = H.getKEY_D_answer(index);
 			tests[i].E_answer = H.getKEY_E_answer(index);
-			Log.i("#LOT","x2.1");
 			tests[i].correct_answer = H.getKEY_CORRECT(index);
-			Log.i("#LOT","x2.3");
 			tests[i].Eans = H.getKEY_IFEEXISTS(index);
-			Log.i("#LOT","x3");
 		}
 		
 		H.close();
@@ -322,7 +301,8 @@ public class ListOfTests extends Activity {
 	void OpenTest(int num) {
 		Singleton.getInstance().test = tests[num];
 		Singleton.getInstance().ID = num;
-
+		GlobalState gs = (GlobalState) getApplication();
+		gs.setback(true);
 		Intent myIntent = new Intent(ListOfTests.this, Test.class);
 		myIntent.putExtra("com.testterra.main.a", num + 1 + "");
 		startActivityForResult(myIntent, 1);
@@ -347,35 +327,12 @@ public class ListOfTests extends Activity {
 			GlobalState gs = (GlobalState) getApplication();
 
 			if (gs.getback()) {
-
-				if (gs.getansw() == gs.getcorr()) {
-
-					if (!TestCB[gs.getnumb() - 1].isChecked()) {
-						TestCB[gs.getnumb() - 1].setChecked(true);
-						score++;
-
-					}
-
-				} else {
-					if (TestCB[gs.getnumb() - 1].isChecked()) {
-						TestCB[gs.getnumb() - 1].setChecked(false);
-						score--;
-
-					}
-
-				}
-
 				LettersTV[gs.getnumb() - 1].setText(gs.getansw() + "");
-				Corr[gs.getnumb() - 1].setText(gs.getcorr() + "");
+				//Corr[gs.getnumb() - 1].setText(gs.getcorr() + "");
 				gs.setansw("");
 				gs.setcorr("");
+				gs.setback(false);
 			}
-
-			else {
-				gs.setback(true);
-
-			}
-
 		}
 	}
 
