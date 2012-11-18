@@ -74,7 +74,7 @@ public class Statistic extends Activity {
 			}
 			s.close();
 
-			int all_tests = 12;
+			int all_tests = 5;
 			TextView tmp_tv = (TextView) findViewById(R.id.Title);
 			tmp_tv.setVisibility(1);
 			tmp_tv = (TextView) findViewById(R.id.fullTable);
