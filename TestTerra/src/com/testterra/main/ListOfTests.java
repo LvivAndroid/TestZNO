@@ -20,6 +20,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.Gravity;
 import android.view.View;
@@ -34,8 +35,8 @@ import android.widget.TextView;
 
 public class ListOfTests extends Activity {
 
-	public int NumberOfTests;
-
+	final int NumberOfTests = 5;
+	private int DbSize;
 	/* HAAWA's CONSTS */
 
 	public int score = 0;
@@ -61,11 +62,12 @@ public class ListOfTests extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_of_tests);
-		AlternativeDB alt = new AlternativeDB(this);
-		alt.open();
-		NumberOfTests = Integer.parseInt(alt.getKEY_Numb(1));
-		alt.close();
-		NumberOfTests = 12;
+		
+		Helper H = new Helper(this);
+		H.open();
+		DbSize = (int) H.getSize();
+		H.close();
+		
 		TestTV = new TextView[NumberOfTests];
 		LettersTV = new TextView[NumberOfTests];
 		Corr = new TextView[NumberOfTests];
@@ -251,7 +253,7 @@ public class ListOfTests extends Activity {
 
 	void GenereteListOfTests() {
 
-		int amount_of_tests = 24;
+		int amount_of_tests = DbSize;
 		Boolean[] used = new Boolean[amount_of_tests];
 		for (int i = 0; i < amount_of_tests; i++)
 			used[i] = false;
@@ -274,6 +276,7 @@ public class ListOfTests extends Activity {
 					it = 0;
 			}
 			it = (it - 1 + amount_of_tests) % amount_of_tests;
+			Log.i("#LIT", Integer.toString(it));
 			used[it] = true;
 			WhatTests[added] = it;
 			added++;
@@ -306,7 +309,6 @@ public class ListOfTests extends Activity {
 		Intent myIntent = new Intent(ListOfTests.this, Test.class);
 		myIntent.putExtra("com.testterra.main.a", num + 1 + "");
 		startActivityForResult(myIntent, 1);
-
 	}
 
 	@Override
@@ -321,14 +323,11 @@ public class ListOfTests extends Activity {
 		super.onResume();
 		count++;
 		if (count > 1)
-
 		{
-
 			GlobalState gs = (GlobalState) getApplication();
 
 			if (gs.getback()) {
 				LettersTV[gs.getnumb() - 1].setText(gs.getansw() + "");
-				//Corr[gs.getnumb() - 1].setText(gs.getcorr() + "");
 				gs.setansw("");
 				gs.setcorr("");
 				gs.setback(false);
