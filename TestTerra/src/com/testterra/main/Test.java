@@ -98,8 +98,8 @@ public class Test extends Activity {
 		});
 
 		Button EBut = (Button) findViewById(R.id.EBut);
-		if (!gs.getsubm())
-			EBut.setEnabled(false);
+		EBut.setEnabled(Singleton.getInstance().test.Eans);
+		
 		EBut.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -135,8 +135,10 @@ public class Test extends Activity {
 		tv.setText("Ã) " + Singleton.getInstance().test.D_answer);
 		tv.setText(Html.fromHtml(tv.getText() + ""));
 		tv = (TextView) findViewById(R.id.ansE);
-		tv.setText("Ä) " + Singleton.getInstance().test.E_answer);
-		tv.setText(Html.fromHtml(tv.getText() + ""));
+		if(Singleton.getInstance().test.Eans) {
+			tv.setText("Ä) " + Singleton.getInstance().test.E_answer);
+			tv.setText(Html.fromHtml(tv.getText() + ""));
+		}
 	}
 
 	@Override

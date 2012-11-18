@@ -173,7 +173,7 @@ public class Helper {
 				+ l, null, null, null, null);
 		if (c != null) {
 			c.moveToFirst();
-			boolean data = Boolean.parseBoolean(c.getString(8));
+			boolean data = c.getInt(8)>0;
 			c.close();
 			return data;
 		}
