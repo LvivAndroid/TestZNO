@@ -81,13 +81,25 @@ public class Download extends Activity {
 
 		URL url = new URL(ukrm_url_link);
 		URLConnection urlConnection = url.openConnection();
+		
+		urlConnection.setUseCaches(false);
+		long tm1 = urlConnection.getLastModified();
 		urlConnection.connect();
 		long new_file_size = urlConnection.getContentLength();
+		
+		
+		URL static_url = new URL("http://pitest.org.ua/android/ukrm1.sqlite");
+		URLConnection static_urlConnection = static_url.openConnection();
+		long tm2 = static_urlConnection.getLastModified();
+		
 		new_length = new_file_size;
 		File file = new File(ukrm_dir);
 		long old_file_size = file.length();
 		old_length = old_file_size;
-		if (new_file_size > old_file_size)
+		
+		tm2 = file.lastModified();
+		
+		if (tm2 < tm1)
 			return true;
 		else {
 			CreateToast(getString(R.string.update_noneed_toast));
