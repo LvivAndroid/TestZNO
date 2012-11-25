@@ -116,6 +116,9 @@ public class ListOfTests extends Activity {
 
 		// КІНЕЦЬ: Перевірка орієнтації екрану,-> пошук ширини і висоти екрану
 
+		int itemH = Math.min(height, width) / 6;
+		//itemH = 60 * height / 800;
+		
 		/*
 		 * тут потрібно витягти з Bundle імя + розширення файлу, з якого
 		 * зчитуватимемо тести
@@ -154,7 +157,7 @@ public class ListOfTests extends Activity {
 			LettersTV[i].setTextColor(Color.WHITE);
 			LettersTV[i].setTypeface(null, Typeface.BOLD);
 			LettersTV[i].setGravity(Gravity.CENTER);
-			LettersTV[i].setBackgroundResource(R.drawable.bg_tail);
+			LettersTV[i].setBackgroundResource(R.drawable.bg_mid);
 			//
 
 			// Creating TextViews with correct answers
@@ -163,21 +166,22 @@ public class ListOfTests extends Activity {
 			Corr[i].setTextColor(Color.WHITE);
 			Corr[i].setTypeface(null, Typeface.BOLD);
 			Corr[i].setGravity(Gravity.CENTER);
-			Corr[i].setVisibility(4);
 			Corr[i].setBackgroundResource(R.drawable.bg_tail);
 			//
 
 			// Ієрархія View
-			TR.addView(TestTV[i], 260 * width / 480, 60 * height / 800);
-			TR.addView(LettersTV[i], 60 * width / 480, 60 * height / 800);
-			TR.addView(Corr[i], 60 * width / 480, 60 * height / 800);
+			
+			TR.addView(TestTV[i], 260 * width / 480, itemH);
+			TR.addView(LettersTV[i], 60 * width / 480, itemH);
+			TR.addView(Corr[i], 60 * width / 480, itemH);
 			TL.addView(TR);
 		}
 
-		//LL.addView(TL);
-		
 		Submit = new Button(this);
 		Submit.setText("Звірити результати");
+		Submit.setTypeface(null, Typeface.BOLD);
+		Submit.setBackgroundResource(R.drawable.submit_state);
+		//Submit.setBackgroundColor(R.drawable.submit_state);
 		Submit.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -235,10 +239,8 @@ public class ListOfTests extends Activity {
 
 			}
 		});
-		TableRow TR = new TableRow(this);
-		TR.setGravity(Gravity.CENTER);
 		
-		TL.addView(Submit, new LayoutParams(LayoutParams.FILL_PARENT, LayoutParams.WRAP_CONTENT));
+		TL.addView(Submit, 380 * width / 480, itemH);
 		SV.setBackgroundDrawable(gd);
 		LL.addView(TL);
 		LL.setOrientation(LinearLayout.VERTICAL);

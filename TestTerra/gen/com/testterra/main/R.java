@@ -77,17 +77,20 @@ public final class R {
         public static final int records_state=0x7f020039;
         public static final int results_button=0x7f02003a;
         public static final int sett=0x7f02003b;
-        public static final int test_button=0x7f02003c;
-        public static final int test_state=0x7f02003d;
-        public static final int testnumbbg=0x7f02003e;
-        public static final int tuc=0x7f02003f;
-        public static final int tuc1=0x7f020040;
-        public static final int tucb2=0x7f020041;
-        public static final int ukrm_button=0x7f020042;
-        public static final int ukrm_state=0x7f020043;
-        public static final int unt=0x7f020044;
-        public static final int unt1=0x7f020045;
-        public static final int untb2=0x7f020046;
+        public static final int submit=0x7f02003c;
+        public static final int submit_pressed=0x7f02003d;
+        public static final int submit_state=0x7f02003e;
+        public static final int test_button=0x7f02003f;
+        public static final int test_state=0x7f020040;
+        public static final int testnumbbg=0x7f020041;
+        public static final int tuc=0x7f020042;
+        public static final int tuc1=0x7f020043;
+        public static final int tucb2=0x7f020044;
+        public static final int ukrm_button=0x7f020045;
+        public static final int ukrm_state=0x7f020046;
+        public static final int unt=0x7f020047;
+        public static final int unt1=0x7f020048;
+        public static final int untb2=0x7f020049;
     }
     public static final class id {
         public static final int ABut=0x7f07001b;
