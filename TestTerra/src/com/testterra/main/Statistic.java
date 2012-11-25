@@ -12,6 +12,7 @@ import android.app.Activity;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.os.Environment;
+import android.text.Html;
 import android.view.Display;
 import android.widget.TextView;
 
@@ -90,11 +91,13 @@ public class Statistic extends Activity {
 			String show = "";
 
 			for (int i = 0; i < n; i++) {
-				show += values[i] + " бали(-ів) з " + outof[i] + ", "
-						+ dates[i] + "\n";
+				show += "<b>" + values[i] + "</b> бали(-ів) з <b>" + outof[i] + "</b>, "
+						+ dates[i] + "<br>";
 			}
 			tmp_tv = (TextView) findViewById(R.id.allResults);
-			tmp_tv.setText(show);
+			tmp_tv.setTextSize(16);
+			tmp_tv.setText(Html.fromHtml(show));
+			//tmp_tv.setText(show);
 		} catch (FileNotFoundException e) {
 			TextView maxScore = (TextView) findViewById(R.id.maxScore);
 			maxScore.setText("Досі Ви не проходили тестування");
