@@ -26,16 +26,30 @@ public class SubjectSelector extends Activity {
 
 	}
 
-	public void RunPhysics(View view) {
+	public void RunUkrm(View view) {
 		if (checkfile(getString(R.string.ukrm_database_name),
 				getString(R.string.all_databases_path))) {
 			Intent myIntent = new Intent(SubjectSelector.this,
 					ListOfTests.class);
 			/* add info about subject */
+			Singleton.getInstance().setTABLE("Ukrm1");
 			startActivity(myIntent);
 		}
 	}
 
+
+	public void RunUkrl(View view) {
+		if (checkfile(getString(R.string.ukrm_database_name),
+				getString(R.string.all_databases_path))) {
+			Intent myIntent = new Intent(SubjectSelector.this,
+					ListOfTests.class);
+			/* add info about subject */
+			Singleton.getInstance().setTABLE("Ukrl1");
+			startActivity(myIntent);
+		}
+	}
+
+	
 	public boolean checkfile(String filename, String dir) {
 		File file = new File(dir + filename);
 		if (!file.exists()) {

@@ -28,8 +28,7 @@
     <string name="onback_press_dialog_yes">Вихід</string>
     <string name="onback_press_dialog_no">Скасувати</string>
     
-    <string name="about_text">Дана програма виконана в рамках конкурсу \"Золотий Байт\"</string>
-    <string name="about_links"><a href='http://vk.com/cupidon4uk'>Миляник Іван</a><p></p><a href='http://vk.com/haawa'>  Харчишин Андрій</a><p></p></string>
+    <string name="about_text">Дана програма стане в нагоді абітурієнтам, які готуються до ЗНО."</string>
     
     
     <string name="settings_title1">Виберіть кількість тестів</string>

@@ -20,7 +20,7 @@ public class Helper {
 	public static final String KEY_IFEEXISTS = "IfEExists";
 
 	private static final String DATABASE_NAME = "ukrm.sqlite";
-	private static final String DATABASE_TABLE = "Ukrm1";
+	private String DATABASE_TABLE = "Ukrm1";
 	private static final int DATABASE_VERSION = 1;
 
 	private DbHelper ourHelper;
@@ -46,7 +46,8 @@ public class Helper {
 
 	}
 
-	public Helper(Context c) {
+	public Helper(Context c, String dataBase_table) {
+		DATABASE_TABLE = dataBase_table;
 		ourContext = c;
 	}
 

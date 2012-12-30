@@ -31,7 +31,6 @@ import android.widget.ScrollView;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class ListOfTests extends Activity {
 
@@ -55,15 +54,15 @@ public class ListOfTests extends Activity {
 	public int RowWidth;
 	public int orientation;
 	public Button Submit;
-
+	private String DB_TABLE;
 	/* end HAAWA's CONSTS */
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.list_of_tests);
-		
-		Helper H = new Helper(this);
+		DB_TABLE = Singleton.getInstance().getTABLE();
+		Helper H = new Helper(this, DB_TABLE);
 		H.open();
 		DbSize = (int) H.getSize();
 		H.close();
@@ -285,7 +284,7 @@ public class ListOfTests extends Activity {
 			WhatTests[added] = it;
 			added++;
 		}
-		Helper H = new Helper(this);
+		Helper H = new Helper(this, DB_TABLE);
 		H.open();
 		for (int i = 0; i < NumberOfTests; i++)
 			tests[i] = new MyTest();

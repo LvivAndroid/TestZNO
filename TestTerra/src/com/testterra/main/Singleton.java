@@ -6,6 +6,7 @@ public class Singleton {
 	int ID;
 	int ALL_TESTS;
 	boolean call_on_create;
+	private String TABLE; 
 
 	private Singleton() {
 		call_on_create = true;
@@ -17,6 +18,14 @@ public class Singleton {
 		if (instance == null)
 			instance = new Singleton();
 		return instance;
+	}
+
+	public String getTABLE() {
+		return TABLE;
+	}
+
+	public void setTABLE(String tABLE) {
+		TABLE = tABLE;
 	}
 
 }

@@ -8,18 +8,17 @@
     android:weightSum="1" >
 
     <Button
-        android:id="@+id/Physics"
+        android:id="@+id/Ukrm"
         android:layout_width="164dp"
         android:layout_height="108dp"
         android:background="@drawable/ukrm_state"
-        android:onClick="RunPhysics" />
+        android:onClick="RunUkrm" />
 
     <Button
-        android:id="@+id/Maths"
+        android:id="@+id/Ukrl"
         android:layout_width="164dp"
         android:layout_height="108dp"
-        android:onClick="RunMaths"
-        android:background="@drawable/en_state"
-        android:enabled="false" />
+        android:onClick="RunUkrl"
+        android:background="@drawable/ukrl_state" />
 
 </LinearLayout>
