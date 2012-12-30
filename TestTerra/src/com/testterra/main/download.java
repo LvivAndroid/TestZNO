@@ -62,14 +62,11 @@ public class Download extends Activity {
 			height = metrics.widthPixels;
 		}
 
-		// LinearLayout LL = (LinearLayout) findViewById(R.id.linearLayout1);
-
 		try {
 			if (ifAvaliableUpdates()) {
 				startDownload(ukrm_url_link);
 			}
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			CreateToast(getString(R.string.update_fail_toast));
 			e.printStackTrace();
 			finish();
@@ -88,16 +85,12 @@ public class Download extends Activity {
 		long new_file_size = urlConnection.getContentLength();
 		
 		
-		URL static_url = new URL("http://pitest.org.ua/android/ukrm1.sqlite");
-		URLConnection static_urlConnection = static_url.openConnection();
-		long tm2 = static_urlConnection.getLastModified();
-		
 		new_length = new_file_size;
 		File file = new File(ukrm_dir);
 		long old_file_size = file.length();
 		old_length = old_file_size;
 		
-		tm2 = file.lastModified();
+		long tm2 = file.lastModified();
 		
 		if (tm2 < tm1)
 			return true;
@@ -128,7 +121,7 @@ public class Download extends Activity {
 		switch (id) {
 		case DIALOG_DOWNLOAD_PROGRESS:
 			mProgressDialog = new ProgressDialog(this);
-			mProgressDialog.setMessage("Downloading file..");
+			mProgressDialog.setMessage("Завантаження файлу...");
 			mProgressDialog.setProgressStyle(ProgressDialog.STYLE_HORIZONTAL);
 			mProgressDialog.setCancelable(false);
 			mProgressDialog.show();
