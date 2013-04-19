@@ -96,8 +96,7 @@ public class Download extends Activity {
 			return true;
 		else {
 			CreateToast(getString(R.string.update_noneed_toast));
-			finish();
-			return false;
+			finish();return false;
 
 		}
 	}

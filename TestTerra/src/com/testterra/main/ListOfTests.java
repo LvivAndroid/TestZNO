@@ -288,6 +288,7 @@ public class ListOfTests extends Activity {
 		H.open();
 		for (int i = 0; i < NumberOfTests; i++)
 			tests[i] = new MyTest();
+		//WhatTests[0] = 923;
 		for (int i = 0; i < NumberOfTests; i++) {
 			int index = WhatTests[i] + 1;
 			tests[i].statement = H.getKEY_TEST(index);

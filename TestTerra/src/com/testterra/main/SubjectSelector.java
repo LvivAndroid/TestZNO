@@ -36,8 +36,7 @@ public class SubjectSelector extends Activity {
 			startActivity(myIntent);
 		}
 	}
-
-
+	
 	public void RunUkrl(View view) {
 		if (checkfile(getString(R.string.ukrm_database_name),
 				getString(R.string.all_databases_path))) {
@@ -49,6 +48,16 @@ public class SubjectSelector extends Activity {
 		}
 	}
 
+	public void RunUkrh(View view) {
+		if (checkfile(getString(R.string.ukrm_database_name),
+				getString(R.string.all_databases_path))) {
+			Intent myIntent = new Intent(SubjectSelector.this,
+					ListOfTests.class);
+			/* add info about subject */
+			Singleton.getInstance().setTABLE("Ukrh1");
+			startActivity(myIntent);
+		}
+	}
 	
 	public boolean checkfile(String filename, String dir) {
 		File file = new File(dir + filename);
