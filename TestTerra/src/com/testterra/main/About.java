@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class About extends Activity {
 
@@ -27,7 +28,8 @@ public class About extends Activity {
 
 		TextView About_text_2 = (TextView) findViewById(R.id.about_text2);
 		About_text_2.setMovementMethod(LinkMovementMethod.getInstance());
-		String text = "<a href='http://vk.com/testterra'>Група в VK для обговорення</a><p></p><p>Розробники</p><a href='http://vk.com/cupidon4uk'>Миляник Іван</a><p></p><a href='http://vk.com/haawa'>Харчишин Андрій</a><p></p>";
+		String text = getResources().getString(R.string.about_text_2);
+		
 		About_text_2.setText(Html.fromHtml(text));
 	}
 

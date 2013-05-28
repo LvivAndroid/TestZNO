@@ -137,6 +137,7 @@ public final class R {
     }
     public static final class string {
         public static final int about_text=0x7f040015;
+        public static final int about_text_2=0x7f040016;
         public static final int all_databases_path=0x7f040007;
         public static final int alt_database_name=0x7f040008;
         public static final int app_name=0x7f040001;
@@ -149,14 +150,14 @@ public final class R {
         public static final int onback_press_dialog_yes=0x7f040013;
         public static final int package_name=0x7f040002;
         public static final int scoreFile=0x7f040003;
-        public static final int settings_submit_button=0x7f040019;
-        public static final int settings_test_amount1=0x7f040017;
-        public static final int settings_test_amount2=0x7f040018;
-        public static final int settings_title1=0x7f040016;
-        public static final int statistics_all_results=0x7f04001d;
-        public static final int statistics_hight_score=0x7f04001c;
-        public static final int statistics_title=0x7f04001b;
-        public static final int test_title=0x7f04001a;
+        public static final int settings_submit_button=0x7f04001a;
+        public static final int settings_test_amount1=0x7f040018;
+        public static final int settings_test_amount2=0x7f040019;
+        public static final int settings_title1=0x7f040017;
+        public static final int statistics_all_results=0x7f04001e;
+        public static final int statistics_hight_score=0x7f04001d;
+        public static final int statistics_title=0x7f04001c;
+        public static final int test_title=0x7f04001b;
         public static final int ukrm_database_link=0x7f040004;
         public static final int ukrm_database_name=0x7f040005;
         public static final int ukrm_database_path=0x7f040006;
