@@ -1,5 +1,7 @@
 package com.testterra.main;
 
+import com.google.ads.*;
+
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.drawable.GradientDrawable;
@@ -11,12 +13,14 @@ import android.widget.Button;
 import android.widget.TextView;
 
 public class Test extends Activity {
+	private AdView adView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		// TODO Auto-generated method stub
 		super.onCreate(savedInstanceState);
 
+		
 		// gradient
 		GradientDrawable gd = (GradientDrawable) getApplicationContext()
 				.getResources().getDrawable(R.drawable.grad);
@@ -24,10 +28,16 @@ public class Test extends Activity {
 		int width = display.getWidth();
 		int height = display.getHeight();
 		gd.setGradientRadius((float) (Math.max(width, height) * 0.5 + 20));
-
+		setContentView(R.layout.test);
+		
+		 // Look up the AdView as a resource and load a request.
+	    AdView adView = (AdView)this.findViewById(R.id.adView);
+	    adView.loadAd(new AdRequest());
 		// letters
 		String[] Letters = { "À", "Á", "Â", "Ã", "Ä" };
-		setContentView(R.layout.test);
+		
+		
+		
 		final Intent myIntent = getIntent();
 		final String a = myIntent.getStringExtra("com.testterra.main.a");
 		TextView tv = (TextView) findViewById(R.id.textView1);
@@ -136,7 +146,7 @@ public class Test extends Activity {
 		tv.setText("Ã) " + Singleton.getInstance().test.D_answer);
 		tv.setText(Html.fromHtml(tv.getText() + ""));
 		tv = (TextView) findViewById(R.id.ansE);
-		if(Singleton.getInstance().test.Eans) {
+		if (Singleton.getInstance().test.Eans) {
 			tv.setText("Ä) " + Singleton.getInstance().test.E_answer);
 			tv.setText(Html.fromHtml(tv.getText() + ""));
 		}
@@ -148,6 +158,14 @@ public class Test extends Activity {
 		gs.setback(false);
 		setResult(RESULT_OK);
 		finish();
+	}
+
+	@Override
+	public void onDestroy() {
+		if (adView != null) {
+			adView.destroy();
+		}
+		super.onDestroy();
 	}
 
 }

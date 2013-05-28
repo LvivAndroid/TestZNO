@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.text.Html;
 import android.text.method.LinkMovementMethod;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class About extends Activity {
 
