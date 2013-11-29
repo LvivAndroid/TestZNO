@@ -61,17 +61,7 @@ public class Download extends Activity {
 			width = metrics.heightPixels;
 			height = metrics.widthPixels;
 		}
-
-		try {
-			if (ifAvaliableUpdates()) {
-				startDownload(ukrm_url_link);
-			}
-		} catch (IOException e) {
-			CreateToast(getString(R.string.update_fail_toast));
-			e.printStackTrace();
-			finish();
-		}
-
+		startDownload(ukrm_url_link);
 	}
 
 	private boolean ifAvaliableUpdates() throws IOException {
@@ -140,41 +130,50 @@ public class Download extends Activity {
 
 		@Override
 		protected String doInBackground(String... aurl) {
-			int count;
-
 			try {
+				if (ifAvaliableUpdates()) {
+					int count;
 
-				URL url = new URL(aurl[0]);
-				URLConnection conexion = url.openConnection();
-				conexion.connect();
+					try {
 
-				int lenghtOfFile = conexion.getContentLength();
+						URL url = new URL(aurl[0]);
+						URLConnection conexion = url.openConnection();
+						conexion.connect();
 
-				try {
-					File file = new File(ukrm_dir);
-					file.delete();
-				} catch (Exception e) {
-					e.printStackTrace();
+						int lenghtOfFile = conexion.getContentLength();
+
+						try {
+							File file = new File(ukrm_dir);
+							file.delete();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+
+						InputStream input = new BufferedInputStream(url.openStream());
+						OutputStream output = new FileOutputStream(ukrm_dir);
+
+						byte data[] = new byte[1024];
+
+						long total = 0;
+
+						while ((count = input.read(data)) != -1) {
+							total += count;
+							publishProgress("" + (int) ((total * 100) / lenghtOfFile));
+							output.write(data, 0, count);
+						}
+
+						output.flush();
+						output.close();
+						input.close();
+					} catch (Exception e) {
+					}
+					return null;
 				}
-
-				InputStream input = new BufferedInputStream(url.openStream());
-				OutputStream output = new FileOutputStream(ukrm_dir);
-
-				byte data[] = new byte[1024];
-
-				long total = 0;
-
-				while ((count = input.read(data)) != -1) {
-					total += count;
-					publishProgress("" + (int) ((total * 100) / lenghtOfFile));
-					output.write(data, 0, count);
-				}
-
-				output.flush();
-				output.close();
-				input.close();
-			} catch (Exception e) {
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
 			}
+			
 			return null;
 
 		}
